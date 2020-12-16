@@ -17,42 +17,42 @@ export function generateLevelDefinitions(limitedVersion = false) {
     const levelDefinitions = [
         // Level 1
         {
-            shape: "RuRuRuRu:RuRuRuRu:RuRuRuRu:RuRuRuRu", // belts t1
+            shape: "RuRuRuRu:RuRuRuRu:RuRuRuRu:RuRuRuRu",
             required: 10,
             reward: enumHubGoalRewards.reward_cutter_and_trash,
         },
 
         // Level 2
         {
-            shape: "SwSwSwSw", //
+            shape: "SwSwSwSw",
             required: 10,
             reward: enumHubGoalRewards.no_reward,
         },
 
         // Level 3
         {
-            shape: "RbCbRbCb", // miners t1
+            shape: "RbCbRbCb",
             required: 10,
             reward: enumHubGoalRewards.reward_balancer,
         },
 
         // Level 4
         {
-            shape: "RbRbRbRb:RwRwRwRw", // processors t2
+            shape: "RbRbRbRb:RwRwRwRw",
             required: 10,
             reward: enumHubGoalRewards.reward_rotater,
         },
 
         // Level 5
         {
-            shape: "RuCuSuCu", // belts t2
+            shape: "RuCuSuCu",
             required: 10,
             reward: enumHubGoalRewards.reward_tunnel,
         },
 
         // Level 6
         {
-            shape: "WrWrWrWr", // miners t2
+            shape: "WrWrWrWr",
             required: 5, // Per Second
             reward: enumHubGoalRewards.reward_painter,
             throughputOnly: true,
@@ -60,35 +60,35 @@ export function generateLevelDefinitions(limitedVersion = false) {
 
         // Level 7
         {
-            shape: "--RcCc--:CwRw----", // unused
+            shape: "--RcCc--:CwRw----",
             required: 10,
             reward: enumHubGoalRewards.reward_rotater_ccw,
         },
 
         // Level 8
         {
-            shape: "CuCuCuCu:--CuCuCu:----CuCu:------Cu", // painter t2
+            shape: "CuCuCuCu:--CuCuCu:----CuCu:------Cu",
             required: 10,
             reward: enumHubGoalRewards.reward_mixer,
         },
 
         // Level 9
         {
-            shape: "CpCpCpCp", // belts t3
+            shape: "CpCpCpCp",
             required: 600,
             reward: enumHubGoalRewards.reward_merger,
         },
 
         // Level 10
         {
-            shape: "ScScScSc", // miners t3
+            shape: "ScScScSc",
             required: 800,
             reward: enumHubGoalRewards.reward_stacker,
         },
 
         // Level 11
         {
-            shape: "CgScScCg", // processors t3
+            shape: "CgScScCg",
             required: 1000,
             reward: enumHubGoalRewards.reward_miner_chainable,
         },
@@ -102,7 +102,7 @@ export function generateLevelDefinitions(limitedVersion = false) {
 
         // Leve 13
         {
-            shape: "RpRpRpRp:CwCwCwCw", // painting t3
+            shape: "RpRpRpRp:CwCwCwCw",
             required: 3800,
             reward: enumHubGoalRewards.reward_underground_belt_tier_2,
         },
