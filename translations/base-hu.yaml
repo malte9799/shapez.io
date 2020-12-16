@@ -258,11 +258,6 @@ ingame:
         newUpgrade: Egy új fejlesztés elérhető!
         gameSaved: Játékállás mentve.
         freeplayLevelComplete: <level>. Szint teljesítve!
-    shop:
-        title: Fejlesztések
-        buttonUnlock: Fejlesztés
-        tier: <x>. Szint
-        maximumLevel: LEGMAGASABB SZINT (<currentMult>x Sebesség)
     statistics:
         title: Statisztika
         dataSources:
@@ -377,19 +372,6 @@ ingame:
             support:
                 title: Támogass
                 desc: A játékot továbbfejlesztem szabadidőmben
-shopUpgrades:
-    belt:
-        name: Futószalagok, Elosztók & Alagutak
-        description: <currentMult>x → <newMult>x Sebesség
-    miner:
-        name: Bányászat
-        description: <currentMult>x → <newMult>x Sebesség
-    processors:
-        name: Vágás, Forgatás & Összeillesztés
-        description: <currentMult>x → <newMult>x Sebesség
-    painting:
-        name: Színkeverés & Festés
-        description: <currentMult>x → <newMult>x Sebesség
 buildings:
     hub:
         deliver: Szállíts
@@ -938,7 +920,6 @@ keybindings:
         mapZoomIn: Nagyítás
         mapZoomOut: Kicsinytés
         createMarker: Jelölő létrehozása
-        menuOpenShop: Fejlesztések
         menuOpenStats: Statisztika
         menuClose: Menü bezárása
         toggleHud: Felület ki-/bekapcsolása

@@ -137,14 +137,6 @@ export class RestrictionManager extends ReadWriteProxy {
     }
 
     /**
-     * Returns if all upgrades are available
-     * @returns {boolean}
-     */
-    getHasExtendedUpgrades() {
-        return !this.isLimitedVersion() || this.currentData.savegameV1119Imported;
-    }
-
-    /**
      * Returns if all levels & freeplay is available
      * @returns {boolean}
      */

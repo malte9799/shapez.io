@@ -247,11 +247,6 @@ ingame:
         newUpgrade: Nové vylepšení je k dispozici!
         gameSaved: Hra byla uložena.
         freeplayLevelComplete: Úroveň <level> dokončena!
-    shop:
-        title: Vylepšení
-        buttonUnlock: Vylepšit
-        tier: Úroveň <x>
-        maximumLevel: MAXIMÁLNÍ ÚROVEŇ (Rychlost x<currentMult>)
     statistics:
         title: Statistiky
         dataSources:
@@ -375,19 +370,6 @@ ingame:
             support:
                 title: Podpořte mě
                 desc: Vyvíjím to ve svém volném čase!
-shopUpgrades:
-    belt:
-        name: Pásy, distribuce a tunely
-        description: Rychlost x<currentMult> → x<newMult>
-    miner:
-        name: Extrakce
-        description: Rychlost x<currentMult> → x<newMult>
-    processors:
-        name: Řezání, otáčení a spojování
-        description: Rychlost x<currentMult> → x<newMult>
-    painting:
-        name: Míchání a barvení
-        description: Rychlost x<currentMult> → x<newMult>
 buildings:
     hub:
         deliver: Dodejte
@@ -919,7 +901,6 @@ keybindings:
         mapZoomIn: Přiblížit
         mapZoomOut: Oddálit
         createMarker: Vytvořit značku
-        menuOpenShop: Vylepšení
         menuOpenStats: Statistiky
         toggleHud: Přepnout HUD
         toggleFPSInfo: Přepnout zobrazení FPS a ladících informací

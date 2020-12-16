@@ -257,11 +257,6 @@ ingame:
         newUpgrade: Nova nadogradnja je dostupna!
         gameSaved: Igra je spremljena.
         freeplayLevelComplete: Level <level> has been completed!
-    shop:
-        title: Nadogradnje
-        buttonUnlock: Nadogradi
-        tier: Razina <x>
-        maximumLevel: MAKSIMALNI LEVEL (Brzina x<currentMult>)
     statistics:
         title: Statistika
         dataSources:
@@ -374,19 +369,6 @@ ingame:
             support:
                 title: Support me
                 desc: I develop it in my spare time!
-shopUpgrades:
-    belt:
-        name: Trake, Distributer i Tuneli
-        description: Brzina x<currentMult> → x<newMult>
-    miner:
-        name: Rudarenje
-        description: Brzina x<currentMult> → x<newMult>
-    processors:
-        name: Rezanje, Okretanje i Slaganje
-        description: Brzina x<currentMult> → x<newMult>
-    painting:
-        name: Miješanje i Bojanje
-        description: Brzina x<currentMult> → x<newMult>
 buildings:
     hub:
         deliver: Dostavi
@@ -922,7 +904,6 @@ keybindings:
         mapZoomIn: Zumiraj
         mapZoomOut: Umanji
         createMarker: Stvori novi Putokaz
-        menuOpenShop: Nadogradnje
         menuOpenStats: Statistika
         toggleHud: Upali/Ugasi HUD
         toggleFPSInfo: Upali/Ugasi informacije o traženju grešaka u kodu

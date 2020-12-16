@@ -156,8 +156,7 @@ export class GameRoot {
             gameFrameStarted: /** @type {TypedSignal<[]>} */ (new Signal()), // New frame
 
             storyGoalCompleted: /** @type {TypedSignal<[number, string]>} */ (new Signal()),
-            upgradePurchased: /** @type {TypedSignal<[string]>} */ (new Signal()),
-
+            
             // Called right after game is initialized
             postLoadHook: /** @type {TypedSignal<[]>} */ (new Signal()),
 

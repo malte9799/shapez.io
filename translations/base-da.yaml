@@ -260,11 +260,6 @@ ingame:
         newUpgrade: En ny opgradering er tilgængelig!
         gameSaved: Dit spil er gemt.
         freeplayLevelComplete: Level <level> er blevet fuldført!
-    shop:
-        title: Opgraderinger
-        buttonUnlock: Opgrader
-        tier: Trin <x>
-        maximumLevel: HØJESTE NIVEAU (Speed x<currentMult>)
     statistics:
         title: Statistikker
         dataSources:
@@ -377,19 +372,6 @@ ingame:
             support:
                 title: Støt mig
                 desc: Jeg arbejder på det i min fritid!
-shopUpgrades:
-    belt:
-        name: Bælter, Fordelere & Tuneller
-        description: Fart x<currentMult> → x<newMult>
-    miner:
-        name: Udvinding
-        description: Fart x<currentMult> → x<newMult>
-    processors:
-        name: Klipning, Rotering & Stabling
-        description: Fart x<currentMult> → x<newMult>
-    painting:
-        name: Blanding & Maling
-        description: Fart x<currentMult> → x<newMult>
 buildings:
     hub:
         deliver: Aflever
@@ -935,7 +917,6 @@ keybindings:
         mapZoomIn: Zoom ind
         mapZoomOut: Zoom ud
         createMarker: Lav Markør
-        menuOpenShop: Opgraderinger
         menuOpenStats: Statistikker
         toggleHud: Slå HUD til/fra
         toggleFPSInfo: Slå FPS og Debug Info til/fra

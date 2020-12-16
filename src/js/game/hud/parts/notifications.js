@@ -5,7 +5,6 @@ import { BaseHUDPart } from "../base_hud_part";
 /** @enum {string} */
 export const enumNotificationType = {
     saved: "saved",
-    upgrade: "upgrade",
     success: "success",
 };
 

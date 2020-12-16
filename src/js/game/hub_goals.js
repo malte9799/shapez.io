@@ -18,7 +18,6 @@ export class HubGoals extends BasicSerializableObject {
         return {
             level: types.uint,
             storedShapes: types.keyValueMap(types.uint),
-            upgradeLevels: types.keyValueMap(types.uint),
         };
     }
 
@@ -48,18 +47,6 @@ export class HubGoals extends BasicSerializableObject {
             }
         }
 
-        // Compute upgrade improvements
-        const upgrades = this.root.gameMode.getUpgrades();
-        for (const upgradeId in upgrades) {
-            const tiers = upgrades[upgradeId];
-            const level = this.upgradeLevels[upgradeId] || 0;
-            let totalImprovement = 1;
-            for (let i = 0; i < level; ++i) {
-                totalImprovement += tiers[i].improvement;
-            }
-            this.upgradeImprovements[upgradeId] = totalImprovement;
-        }
-
         // Compute current goal
         this.computeNextGoal();
     }
@@ -85,25 +72,6 @@ export class HubGoals extends BasicSerializableObject {
          * @type {Object<string, number>}
          */
         this.storedShapes = {};
-
-        /**
-         * Stores the levels for all upgrades
-         * @type {Object<string, number>}
-         */
-        this.upgradeLevels = {};
-
-        /**
-         * Stores the improvements for all upgrades
-         * @type {Object<string, number>}
-         */
-        this.upgradeImprovements = {};
-
-        // Reset levels first
-        const upgrades = this.root.gameMode.getUpgrades();
-        for (const key in upgrades) {
-            this.upgradeLevels[key] = 0;
-            this.upgradeImprovements[key] = 1;
-        }
 
         this.computeNextGoal();
 
@@ -180,22 +148,15 @@ export class HubGoals extends BasicSerializableObject {
     }
 
     /**
-     * Returns the current level of a given upgrade
-     * @param {string} upgradeId
-     */
-    getUpgradeLevel(upgradeId) {
-        return this.upgradeLevels[upgradeId] || 0;
-    }
-
-    /**
      * Returns whether the given reward is already unlocked
      * @param {enumHubGoalRewards} reward
      */
     isRewardUnlocked(reward) {
-        if (G_IS_DEV && globalConfig.debug.allBuildingsUnlocked) {
-            return true;
-        }
-        return !!this.gainedRewards[reward];
+        // if (G_IS_DEV && globalConfig.debug.allBuildingsUnlocked) {
+        //     return true;
+        // }
+        // return !!this.gainedRewards[reward];
+        return true;
     }
 
     /**
@@ -269,86 +230,6 @@ export class HubGoals extends BasicSerializableObject {
         return this.level >= this.root.gameMode.getLevelDefinitions().length;
     }
 
-    /**
-     * Returns whether a given upgrade can be unlocked
-     * @param {string} upgradeId
-     */
-    canUnlockUpgrade(upgradeId) {
-        const tiers = this.root.gameMode.getUpgrades()[upgradeId];
-        const currentLevel = this.getUpgradeLevel(upgradeId);
-
-        if (currentLevel >= tiers.length) {
-            // Max level
-            return false;
-        }
-
-        if (G_IS_DEV && globalConfig.debug.upgradesNoCost) {
-            return true;
-        }
-
-        const tierData = tiers[currentLevel];
-
-        for (let i = 0; i < tierData.required.length; ++i) {
-            const requirement = tierData.required[i];
-            if ((this.storedShapes[requirement.shape] || 0) < requirement.amount) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Returns the number of available upgrades
-     * @returns {number}
-     */
-    getAvailableUpgradeCount() {
-        let count = 0;
-        for (const upgradeId in this.root.gameMode.getUpgrades()) {
-            if (this.canUnlockUpgrade(upgradeId)) {
-                ++count;
-            }
-        }
-        return count;
-    }
-
-    /**
-     * Tries to unlock the given upgrade
-     * @param {string} upgradeId
-     * @returns {boolean}
-     */
-    tryUnlockUpgrade(upgradeId) {
-        if (!this.canUnlockUpgrade(upgradeId)) {
-            return false;
-        }
-
-        const upgradeTiers = this.root.gameMode.getUpgrades()[upgradeId];
-        const currentLevel = this.getUpgradeLevel(upgradeId);
-
-        const tierData = upgradeTiers[currentLevel];
-        if (!tierData) {
-            return false;
-        }
-
-        if (G_IS_DEV && globalConfig.debug.upgradesNoCost) {
-            // Dont take resources
-        } else {
-            for (let i = 0; i < tierData.required.length; ++i) {
-                const requirement = tierData.required[i];
-
-                // Notice: Don't have to check for hash here
-                this.storedShapes[requirement.shape] -= requirement.amount;
-            }
-        }
-
-        this.upgradeLevels[upgradeId] = (this.upgradeLevels[upgradeId] || 0) + 1;
-        this.upgradeImprovements[upgradeId] += tierData.improvement;
-
-        this.root.signals.upgradePurchased.dispatch(upgradeId);
-
-        this.root.app.gameAnalytics.handleUpgradeUnlocked(upgradeId, currentLevel);
-
-        return true;
-    }
 
     /**
      * Picks random colors which are close to each other
@@ -472,7 +353,7 @@ export class HubGoals extends BasicSerializableObject {
      * @returns {number} items / sec
      */
     getBeltBaseSpeed() {
-        return globalConfig.beltSpeedItemsPerSecond * this.upgradeImprovements.belt;
+        return globalConfig.beltSpeedItemsPerSecond;
     }
 
     /**
@@ -480,7 +361,7 @@ export class HubGoals extends BasicSerializableObject {
      * @returns {number} items / sec
      */
     getUndergroundBeltBaseSpeed() {
-        return globalConfig.beltSpeedItemsPerSecond * this.upgradeImprovements.belt;
+        return globalConfig.beltSpeedItemsPerSecond;
     }
 
     /**
@@ -488,7 +369,7 @@ export class HubGoals extends BasicSerializableObject {
      * @returns {number} items / sec
      */
     getMinerBaseSpeed() {
-        return globalConfig.minerSpeedItemsPerSecond * this.upgradeImprovements.miner;
+        return globalConfig.minerSpeedItemsPerSecond;
     }
 
     /**
@@ -502,9 +383,9 @@ export class HubGoals extends BasicSerializableObject {
             case enumItemProcessorTypes.hub:
                 return 1e30;
             case enumItemProcessorTypes.balancer:
-                return globalConfig.beltSpeedItemsPerSecond * this.upgradeImprovements.belt * 2;
+                return globalConfig.beltSpeedItemsPerSecond * 2;
             case enumItemProcessorTypes.reader:
-                return globalConfig.beltSpeedItemsPerSecond * this.upgradeImprovements.belt;
+                return globalConfig.beltSpeedItemsPerSecond;
 
             case enumItemProcessorTypes.mixer:
             case enumItemProcessorTypes.painter:
@@ -516,7 +397,6 @@ export class HubGoals extends BasicSerializableObject {
                 );
                 return (
                     globalConfig.beltSpeedItemsPerSecond *
-                    this.upgradeImprovements.painting *
                     globalConfig.buildingSpeeds[processorType]
                 );
             }
@@ -533,7 +413,6 @@ export class HubGoals extends BasicSerializableObject {
                 );
                 return (
                     globalConfig.beltSpeedItemsPerSecond *
-                    this.upgradeImprovements.processors *
                     globalConfig.buildingSpeeds[processorType]
                 );
             }

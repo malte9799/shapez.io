@@ -263,11 +263,6 @@ ingame:
         newUpgrade: Tingkatan baru tersedia!
         gameSaved: Permainan kamu telah disimpan.
         freeplayLevelComplete: Level <level> telah selesai!
-    shop:
-        title: Tingkatan-tingkatan
-        buttonUnlock: Tingkatkan
-        tier: Tingkat <x>
-        maximumLevel: LEVEL MAKSIMUM (Kecepatan x<currentMult>)
     statistics:
         title: Statistik
         dataSources:
@@ -382,19 +377,6 @@ ingame:
             support:
                 title: Dukung saya
                 desc: Saya membuat game ini di waktu luang!
-shopUpgrades:
-    belt:
-        name: Sabuk konveyor, Pembagi Arus & Terowongan
-        description: Kecepatan x<currentMult> → x<newMult>
-    miner:
-        name: Ekstraksi
-        description: Kecepatan x<currentMult> → x<newMult>
-    processors:
-        name: Memotong, Memutar & Menumpuk
-        description: Kecepatan x<currentMult> → x<newMult>
-    painting:
-        name: Mencampur & Mengecat
-        description: Kecepatan x<currentMult> → x<newMult>
 buildings:
     hub:
         deliver: Kirim
@@ -961,7 +943,6 @@ keybindings:
         mapZoomIn: Zoom in
         mapZoomOut: Zoom out
         createMarker: Buat penanda
-        menuOpenShop: Tingkatan-tingkatan
         menuOpenStats: Statistik
         menuClose: Tutup menu
         toggleHud: Aktifkan HUD

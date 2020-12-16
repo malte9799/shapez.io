@@ -264,11 +264,6 @@ ingame:
         newUpgrade: Una nova millora està disponible!
         gameSaved: La teva/ua partida s'ha guardat.
         freeplayLevelComplete: Level <level> has been completed!
-    shop:
-        title: Millores
-        buttonUnlock: Millorar
-        tier: Nivell <x>
-        maximumLevel: NIVELL MÀXIM (Velocitat x<currentMult>)
     statistics:
         title: Estadístiques
         dataSources:
@@ -383,19 +378,6 @@ ingame:
             support:
                 title: Dona'm suport
                 desc: EL desenvolupo en el meu temps lliure!
-shopUpgrades:
-    belt:
-        name: Cintes transportadores, Distribuidors i Túnels
-        description: Velocitat x<currentMult> → x<newMult>
-    miner:
-        name: Extracció
-        description: Velocitat x<currentMult> → x<newMult>
-    processors:
-        name: Tallar, Rotar i Apilar
-        description: Velocitat x<currentMult> → x<newMult>
-    painting:
-        name: Mesclar i Pintar
-        description: Velocitat x<currentMult> → x<newMult>
 buildings:
     hub:
         deliver: Envia
@@ -955,7 +937,6 @@ keybindings:
         mapZoomIn: Apropar
         mapZoomOut: Allunyar
         createMarker: Crea un Marcador
-        menuOpenShop: Millores
         menuOpenStats: Estadístiques
         menuClose: Tancar Menú
         toggleHud: Commutar HUD

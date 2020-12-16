@@ -19,30 +19,6 @@ export class HUDSandboxController extends BaseHUDPart {
                     <button class="styledButton minus">-</button>
                     <button class="styledButton plus">+</button>
                 </div>
-                
-                <div class="upgradesBelt plusMinus">
-                    <label>Upgrades &rarr; Belt</label>
-                    <button class="styledButton minus">-</button>
-                    <button class="styledButton plus">+</button>
-                </div>
-                
-                <div class="upgradesExtraction plusMinus">
-                    <label>Upgrades &rarr; Extraction</label>
-                    <button class="styledButton minus">-</button>
-                    <button class="styledButton plus">+</button>
-                </div>
-                
-                <div class="upgradesProcessing plusMinus">
-                    <label>Upgrades &rarr; Processing</label>
-                    <button class="styledButton minus">-</button>
-                    <button class="styledButton plus">+</button>
-                </div>
-                
-                <div class="upgradesPainting plusMinus">
-                    <label>Upgrades &rarr; Painting</label>
-                    <button class="styledButton minus">-</button>
-                    <button class="styledButton plus">+</button>
-                </div>
 
                 <div class="additionalOptions">
                     <button class="styledButton giveBlueprints">Fill blueprint shapes</button>
@@ -55,21 +31,9 @@ export class HUDSandboxController extends BaseHUDPart {
         const bind = (selector, handler) => this.trackClicks(this.element.querySelector(selector), handler);
 
         bind(".giveBlueprints", this.giveBlueprints);
-        bind(".maxOutAll", this.maxOutAll);
         bind(".levelToggle .minus", () => this.modifyLevel(-1));
         bind(".levelToggle .plus", () => this.modifyLevel(1));
 
-        bind(".upgradesBelt .minus", () => this.modifyUpgrade("belt", -1));
-        bind(".upgradesBelt .plus", () => this.modifyUpgrade("belt", 1));
-
-        bind(".upgradesExtraction .minus", () => this.modifyUpgrade("miner", -1));
-        bind(".upgradesExtraction .plus", () => this.modifyUpgrade("miner", 1));
-
-        bind(".upgradesProcessing .minus", () => this.modifyUpgrade("processors", -1));
-        bind(".upgradesProcessing .plus", () => this.modifyUpgrade("processors", 1));
-
-        bind(".upgradesPainting .minus", () => this.modifyUpgrade("painting", -1));
-        bind(".upgradesPainting .plus", () => this.modifyUpgrade("painting", 1));
     }
 
     giveBlueprints() {
@@ -78,35 +42,6 @@ export class HUDSandboxController extends BaseHUDPart {
             this.root.hubGoals.storedShapes[shape] = 0;
         }
         this.root.hubGoals.storedShapes[shape] += 1e9;
-    }
-
-    maxOutAll() {
-        this.modifyUpgrade("belt", 100);
-        this.modifyUpgrade("miner", 100);
-        this.modifyUpgrade("processors", 100);
-        this.modifyUpgrade("painting", 100);
-    }
-
-    modifyUpgrade(id, amount) {
-        const upgradeTiers = this.root.gameMode.getUpgrades()[id];
-        const maxLevel = upgradeTiers.length;
-
-        this.root.hubGoals.upgradeLevels[id] = Math.max(
-            0,
-            Math.min(maxLevel, (this.root.hubGoals.upgradeLevels[id] || 0) + amount)
-        );
-
-        // Compute improvement
-        let improvement = 1;
-        for (let i = 0; i < this.root.hubGoals.upgradeLevels[id]; ++i) {
-            improvement += upgradeTiers[i].improvement;
-        }
-        this.root.hubGoals.upgradeImprovements[id] = improvement;
-        this.root.signals.upgradePurchased.dispatch(id);
-        this.root.hud.signals.notification.dispatch(
-            "Upgrade '" + id + "' is now at tier " + (this.root.hubGoals.upgradeLevels[id] + 1),
-            enumNotificationType.upgrade
-        );
     }
 
     modifyLevel(amount) {
@@ -130,8 +65,7 @@ export class HUDSandboxController extends BaseHUDPart {
         }
 
         this.root.hud.signals.notification.dispatch(
-            "Changed level to " + hubGoals.level,
-            enumNotificationType.upgrade
+            "Changed level to " + hubGoals.level
         );
     }
 

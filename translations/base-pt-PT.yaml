@@ -255,11 +255,6 @@ ingame:
         newUpgrade: Está disponível um novo upgrade!
         gameSaved: O teu jogo foi guardado.
         freeplayLevelComplete: Level <level> has been completed!
-    shop:
-        title: Upgrades
-        buttonUnlock: Upgrade
-        tier: Nível <x>
-        maximumLevel: NÍVEL MÁXIMO (Velocidade x<currentMult>)
     statistics:
         title: Estatísticas
         dataSources:
@@ -382,19 +377,6 @@ ingame:
             support:
                 title: Ajuda-me
                 desc: Eu desenvolvo este jogo no meu tempo livre!
-shopUpgrades:
-    belt:
-        name: Tapetes, Distribuidores e Túneis
-        description: Velocidade x<currentMult> → x<newMult>
-    miner:
-        name: Extração
-        description: Velocidade x<currentMult> → x<newMult>
-    processors:
-        name: Corte, Rotação e Montagem
-        description: Velocidade x<currentMult> → x<newMult>
-    painting:
-        name: Mistura e Pintura
-        description: Velocidade x<currentMult> → x<newMult>
 buildings:
     belt:
         default:
@@ -959,7 +941,6 @@ keybindings:
         mapZoomIn: Zoom in
         mapZoomOut: Zoom out
         createMarker: Criar Marco
-        menuOpenShop: Upgrades
         menuOpenStats: Estatísticas
         toggleHud: Ativar/Desativar HUD
         toggleFPSInfo: Mostrar FPS e Debug info

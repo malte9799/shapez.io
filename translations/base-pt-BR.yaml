@@ -257,11 +257,6 @@ ingame:
         newUpgrade: Nova melhoria disponível!
         gameSaved: Seu jogo foi salvo.
         freeplayLevelComplete: Level <level> has been completed!
-    shop:
-        title: Melhorias
-        buttonUnlock: Melhorar
-        tier: Nível <x>
-        maximumLevel: NÍVEL MÁXIMO (Velocidade x<currentMult>)
     statistics:
         title: Estatísticas
         dataSources:
@@ -375,19 +370,6 @@ ingame:
             support:
                 title: Me ajuda
                 desc: Eu desenvolvo o jogo no meu tempo livre!
-shopUpgrades:
-    belt:
-        name: Esteiras, Distribuidores e Túneis
-        description: Velocidade x<currentMult> → x<newMult>
-    miner:
-        name: Extração
-        description: Velocidade x<currentMult> → x<newMult>
-    processors:
-        name: Corte, Rotação e Montagem
-        description: Velocidade x<currentMult> → x<newMult>
-    painting:
-        name: Mistura de cores e Pintura
-        description: Velocidade x<currentMult> → x<newMult>
 buildings:
     hub:
         deliver: Entregue
@@ -952,7 +934,6 @@ keybindings:
         mapZoomIn: Aproximar
         mapZoomOut: Distanciar
         createMarker: Criar marcador
-        menuOpenShop: Melhorias
         menuOpenStats: Estatísticas
         menuClose: Fechar Menu
         toggleHud: Ocultar Interface

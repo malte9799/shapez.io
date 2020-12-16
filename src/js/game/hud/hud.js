@@ -14,7 +14,6 @@ import { HUDBlueprintPlacer } from "./parts/blueprint_placer";
 import { HUDKeybindingOverlay } from "./parts/keybinding_overlay";
 import { HUDUnlockNotification } from "./parts/unlock_notification";
 import { HUDGameMenu } from "./parts/game_menu";
-import { HUDShop } from "./parts/shop";
 import { IS_MOBILE, globalConfig } from "../../core/config";
 import { HUDMassSelector } from "./parts/mass_selector";
 import { HUDVignetteOverlay } from "./parts/vignette_overlay";
@@ -82,7 +81,6 @@ export class GameHUD {
             unlockNotification: new HUDUnlockNotification(this.root),
             gameMenu: new HUDGameMenu(this.root),
             massSelector: new HUDMassSelector(this.root),
-            shop: new HUDShop(this.root),
             statistics: new HUDStatistics(this.root),
             waypoints: new HUDWaypoints(this.root),
             wireInfo: new HUDWireInfo(this.root),

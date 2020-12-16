@@ -261,11 +261,6 @@ ingame:
         newUpgrade: Une nouvelle amélioration est disponible !
         gameSaved: Votre partie a été sauvegardée.
         freeplayLevelComplete: Niveau <level> complet !
-    shop:
-        title: Améliorations
-        buttonUnlock: Améliorer
-        tier: Niveau <x>
-        maximumLevel: NIVEAU MAX (Vitesse ×<currentMult>)
     statistics:
         title: Statistiques
         dataSources:
@@ -381,19 +376,6 @@ ingame:
             support:
                 title: Me soutenir
                 desc: Je le développe pendant mon temps libre !
-shopUpgrades:
-    belt:
-        name: Convoyeurs, distributeurs et tunnels
-        description: Vitesse ×<currentMult> → ×<newMult>
-    miner:
-        name: Extraction
-        description: Vitesse ×<currentMult> → ×<newMult>
-    processors:
-        name: Découpage, rotation et empilage
-        description: Vitesse ×<currentMult> → ×<newMult>
-    painting:
-        name: Mélange et peinture
-        description: Vitesse ×<currentMult> → ×<newMult>
 buildings:
     hub:
         deliver: Livrez
@@ -972,7 +954,6 @@ keybindings:
         mapZoomIn: Zoom avant
         mapZoomOut: Zoom arrière
         createMarker: Créer une balise
-        menuOpenShop: Améliorations
         menuOpenStats: Statistiques
         menuClose: Fermer le menu
         toggleHud: Basculer l’affichage tête haute (ATH)

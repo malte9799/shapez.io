@@ -204,21 +204,6 @@ export class ShapezGameAnalytics extends GameAnalyticsInterface {
             }
         }
 
-        // Check if its required to unlock an upgrade
-        const upgrades = root.gameMode.getUpgrades();
-        for (const upgradeKey in upgrades) {
-            const upgradeTiers = upgrades[upgradeKey];
-            for (let i = 0; i < upgradeTiers.length; ++i) {
-                const tier = upgradeTiers[i];
-                const required = tier.required;
-                for (let k = 0; k < required.length; ++k) {
-                    if (required[k].shape === key) {
-                        return true;
-                    }
-                }
-            }
-        }
-
         return false;
     }
 
@@ -236,7 +221,6 @@ export class ShapezGameAnalytics extends GameAnalyticsInterface {
         }
         return {
             shapes,
-            upgrades: root.hubGoals.upgradeLevels,
             belts: root.entityMgr.getAllWithComponent(BeltComponent).length,
             buildings:
                 root.entityMgr.getAllWithComponent(StaticMapEntityComponent).length -
@@ -263,15 +247,5 @@ export class ShapezGameAnalytics extends GameAnalyticsInterface {
     handleLevelCompleted(level) {
         logger.log("Complete level", level);
         this.sendGameEvent("level_complete", "" + level);
-    }
-
-    /**
-     * Handles the given upgrade completed
-     * @param {string} id
-     * @param {number} level
-     */
-    handleUpgradeUnlocked(id, level) {
-        logger.log("Unlock upgrade", id, level);
-        this.sendGameEvent("upgrade_unlock", id + "@" + level);
     }
 }

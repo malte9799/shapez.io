@@ -369,15 +369,6 @@ ingame:
         gameSaved: Вашу гру збережено.
         freeplayLevelComplete: Рівень <level> було завершено!
 
-    # The "Upgrades" window
-    shop:
-        title: Поліпшення
-        buttonUnlock: Відкрити
-        # Gets replaced to e.g. "Tier IX"
-        tier: Ранг <x>
-
-        maximumLevel: МАКСИМАЛЬНИЙ РІВЕНЬ (Швидкість x<currentMult>)
-
     # The "Statistics" window
     statistics:
         title: Статистика
@@ -538,21 +529,6 @@ ingame:
             support:
                 title: Підтримайте мене
                 desc: Я розробляю гру в свій вільний час!
-
-# All shop upgrades
-shopUpgrades:
-    belt:
-        name: Стрічки, розподілювачі і тунелі
-        description: Шв. x<currentMult> → x<newMult>
-    miner:
-        name: Видобуток
-        description: Шв. x<currentMult> → x<newMult>
-    processors:
-        name: Різання, обертання й укладання
-        description: Шв. x<currentMult> → x<newMult>
-    painting:
-        name: Змішування і малювання
-        description: Шв. x<currentMult> → x<newMult>
 
 # Buildings and their name / description
 buildings:
@@ -1243,7 +1219,6 @@ keybindings:
         mapZoomOut: Віддалити
         createMarker: Створити позначку
 
-        menuOpenShop: Поліпшення
         menuOpenStats: Статистика
         menuClose: Закрити меню
 

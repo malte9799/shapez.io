@@ -34,7 +34,6 @@
 @import "ingame_hud/beta_overlay";
 @import "ingame_hud/keybindings_overlay";
 @import "ingame_hud/unlock_notification";
-@import "ingame_hud/shop";
 @import "ingame_hud/game_menu";
 @import "ingame_hud/dialogs";
 @import "ingame_hud/vignette_overlay";
@@ -56,8 +55,8 @@
 @import "ingame_hud/cat_memes";
 
 // prettier-ignore
-$elements: 
-// Base    
+$elements:
+// Base
 ingame_Canvas,
 ingame_VignetteOverlay,
 
@@ -88,7 +87,6 @@ ingame_HUD_SandboxController,
 ingame_HUD_BetaOverlay,
 
 // Dialogs
-ingame_HUD_Shop,
 ingame_HUD_Statistics,
 ingame_HUD_ShapeViewer,
 ingame_HUD_StandaloneAdvantages,

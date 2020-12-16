@@ -258,11 +258,6 @@ ingame:
         newUpgrade: Μια νέα αναβάθμιση είναι διαθέσιμη!
         gameSaved: Το παιχνίδι έχει αποθηκευτεί.
         freeplayLevelComplete: Level <level> has been completed!
-    shop:
-        title: Αναβαθμίσεις
-        buttonUnlock: Αναβάθμιση
-        tier: Βαθμίδα <x>
-        maximumLevel: ΜΕΓΙΣΤΟ ΕΠΙΠΕΔΟ (Ταχύτητα x<currentMult>)
     statistics:
         title: Στατιστικά
         dataSources:
@@ -388,19 +383,6 @@ ingame:
             support:
                 title: Support me
                 desc: I develop it in my spare time!
-shopUpgrades:
-    belt:
-        name: Ιμάντες, Διανομείς & Σήραγγες
-        description: Ταχύτητα x<currentMult> → x<newMult>
-    miner:
-        name: Απόσπαση
-        description: Ταχύτητα x<currentMult> → x<newMult>
-    processors:
-        name: Κοπή, Περιστροφή & Στοίβαξη
-        description: Ταχύτητα x<currentMult> → x<newMult>
-    painting:
-        name: Ανάμειξη & Βαφή
-        description: Ταχύτητα x<currentMult> → x<newMult>
 buildings:
     belt:
         default:
@@ -958,7 +940,6 @@ keybindings:
         mapZoomIn: Μεγέθυνση
         mapZoomOut: Σμίκρυνση
         createMarker: Δημηουργία Σημαδιού
-        menuOpenShop: Αναβαθμίσεις
         menuOpenStats: Στατιστικές
         toggleHud: Εναλλαγή HUD
         toggleFPSInfo: Εναλλαγή FPS και Πληροφοριών εντοπισμού σφαλμάτων

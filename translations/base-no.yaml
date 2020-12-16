@@ -252,11 +252,6 @@ ingame:
         newUpgrade: En ny oppgradering er tilgjengelig!
         gameSaved: Spillet ditt er lagret.
         freeplayLevelComplete: Level <level> has been completed!
-    shop:
-        title: Oppgraderinger
-        buttonUnlock: Oppgrader
-        tier: Nivå <x>
-        maximumLevel: MAKS NIVÅ (Hastighet x<currentMult>)
     statistics:
         title: Statistikk
         dataSources:
@@ -379,19 +374,6 @@ ingame:
             support:
                 title: Support me
                 desc: I develop it in my spare time!
-shopUpgrades:
-    belt:
-        name: Belter, Distributører & Tunneler
-        description: Hastighet x<currentMult> → x<newMult>
-    miner:
-        name: Utdrager
-        description: Hastighet x<currentMult> → x<newMult>
-    processors:
-        name: Kutting, Rotering & Stabling
-        description: Hastighet x<currentMult> → x<newMult>
-    painting:
-        name: Miksing & Maling
-        description: Hastighet x<currentMult> → x<newMult>
 buildings:
     hub:
         deliver: Lever
@@ -943,7 +925,6 @@ keybindings:
         mapZoomIn: Zoom inn
         mapZoomOut: Zoom ut
         createMarker: Lag Markør
-        menuOpenShop: Oppgraderinger
         menuOpenStats: Statistikk
         toggleHud: Veksle Grensesnitt
         toggleFPSInfo: Veksle FPS-og debuginformasjon

@@ -256,11 +256,6 @@ ingame:
         newUpgrade: Ein neues Upgrade ist verfügbar!
         gameSaved: Dein Spiel wurde gespeichert.
         freeplayLevelComplete: Level <level> abgeschlossen!
-    shop:
-        title: Upgrades
-        buttonUnlock: Upgrade
-        tier: Stufe <x>
-        maximumLevel: MAXIMALE STUFE (Geschw. x<currentMult>)
     statistics:
         title: Statistiken
         dataSources:
@@ -374,19 +369,6 @@ ingame:
             support:
                 title: Unterstütze Mich
                 desc: Ich entwickle in meiner Freizeit!
-shopUpgrades:
-    belt:
-        name: Fließbänder, Verteiler & Tunnel
-        description: Geschw. x<currentMult> → x<newMult>
-    miner:
-        name: Extrahierer
-        description: Geschw. x<currentMult> → x<newMult>
-    processors:
-        name: Schneider, Rotierer & Stapler
-        description: Geschw. x<currentMult> → x<newMult>
-    painting:
-        name: Mischer & Färber
-        description: Geschw. x<currentMult> → x<newMult>
 buildings:
     hub:
         deliver: Liefere
@@ -963,7 +945,6 @@ keybindings:
         mapZoomIn: Reinzoomen
         mapZoomOut: Rauszoomen
         createMarker: Marker erstellen
-        menuOpenShop: Upgrades
         menuOpenStats: Statistiken
         menuClose: Menü schließen
         toggleHud: HUD an/aus

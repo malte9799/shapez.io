@@ -250,11 +250,6 @@ ingame:
         newUpgrade: Yeni geliştirme mevcut!
         gameSaved: Oyun kaydedildi.
         freeplayLevelComplete: Seviye <level> tamamlandı!
-    shop:
-        title: Gelİştİrmeler
-        buttonUnlock: Gelİştİr
-        tier: Aşama <x>
-        maximumLevel: SON SEVİYE (Hız x<currentMult>)
     statistics:
         title: İstatistikler
         dataSources:
@@ -379,19 +374,6 @@ ingame:
             support:
                 title: Beni destekleyin
                 desc: Boş zamanımda bu oyunu geliştiriyorum!
-shopUpgrades:
-    belt:
-        name: Taşıma Bandı, Dağıtıcılar & Tüneller
-        description: Hız x<currentMult> → x<newMult>
-    miner:
-        name: Üretici
-        description: Hız x<currentMult> → x<newMult>
-    processors:
-        name: Kesme, Döndürme & Kaynaştırıcı
-        description: Hız x<currentMult> → x<newMult>
-    painting:
-        name: Karıştırma & Boyama
-        description: Hız x<currentMult> → x<newMult>
 buildings:
     hub:
         deliver: Teslİm et
@@ -941,7 +923,6 @@ keybindings:
         mapZoomIn: Yakınlaş
         mapZoomOut: Uzaklaş
         createMarker: Yer İmi Oluştur
-        menuOpenShop: Geliştirmeler
         menuOpenStats: İstatistikler
         toggleHud: Arayüzü Aç/Kapat
         toggleFPSInfo: FPS ve Debug Bilgisini Aç/Kapat

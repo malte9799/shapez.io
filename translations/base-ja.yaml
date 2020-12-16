@@ -235,11 +235,6 @@ ingame:
         newUpgrade: 新しいアップグレードが利用可能です！
         gameSaved: ゲームをセーブしました。
         freeplayLevelComplete: レベル <level> をクリアしました!
-    shop:
-        title: アップグレード
-        buttonUnlock: アップグレード
-        tier: 第 <x> 段階
-        maximumLevel: 最大レベル (スピード x<currentMult>)
     statistics:
         title: 統計情報
         dataSources:
@@ -345,19 +340,6 @@ ingame:
             support:
                 title: 製作者をサポート
                 desc: 余暇に制作しています！
-shopUpgrades:
-    belt:
-        name: ベルト、ディストリビュータとトンネル
-        description: スピード x<currentMult> → x<newMult>
-    miner:
-        name: 抽出機
-        description: スピード x<currentMult> → x<newMult>
-    processors:
-        name: 切断、回転と積み重ね
-        description: スピード x<currentMult> → x<newMult>
-    painting:
-        name: 混合と着色
-        description: スピード x<currentMult> → x<newMult>
 buildings:
     hub:
         deliver: 納品
@@ -821,7 +803,6 @@ keybindings:
         mapZoomIn: ズームイン
         mapZoomOut: ズームアウト
         createMarker: マーカー設置
-        menuOpenShop: アップグレード
         menuOpenStats: 統計情報
         menuClose: メニューを閉じる
         toggleHud: HUD切り替え

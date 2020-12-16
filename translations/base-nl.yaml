@@ -253,11 +253,6 @@ ingame:
         newUpgrade: Er is een nieuwe upgrade beschikbaar!
         gameSaved: Je spel is opgeslagen.
         freeplayLevelComplete: Level <level> is voltooid!
-    shop:
-        title: Upgrades
-        buttonUnlock: Upgrade
-        tier: Niveau <x>
-        maximumLevel: MAXIMAAL NIVEAU (Snelheid x<currentMult>)
     statistics:
         title: Statistieken
         dataSources:
@@ -382,19 +377,6 @@ ingame:
             support:
                 title: Help mij
                 desc: Ik maak dit spel in mijn vrije tijd!
-shopUpgrades:
-    belt:
-        name: Banden, Verdeler & Tunnels
-        description: Snelheid x<currentMult> → x<newMult>
-    miner:
-        name: Ontginner
-        description: Snelheid x<currentMult> → x<newMult>
-    processors:
-        name: Knippen, draaien & stapelen
-        description: Snelheid x<currentMult> → x<newMult>
-    painting:
-        name: Mengen en verven
-        description: Snelheid x<currentMult> → x<newMult>
 buildings:
     belt:
         default:
@@ -944,7 +926,6 @@ keybindings:
         mapZoomIn: Zoom in
         mapZoomOut: Zoom uit
         createMarker: Plaats een markering
-        menuOpenShop: Upgrades
         menuOpenStats: Statistieken
         toggleHud: Schakel HUD
         toggleFPSInfo: Schakel FPS en Debug Info

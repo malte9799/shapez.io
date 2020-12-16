@@ -229,11 +229,6 @@ ingame:
         newUpgrade: 새로운 업그레이드가 있습니다!
         gameSaved: 게임이 저장되었습니다.
         freeplayLevelComplete: <level> 레벨 성공!
-    shop:
-        title: 업그레이드
-        buttonUnlock: 업그레이드
-        tier: <x> 티어
-        maximumLevel: 최종 레벨 (속도 x<currentMult>)
     statistics:
         title: 통계
         dataSources:
@@ -350,19 +345,6 @@ ingame:
             support:
                 title: 저를 지원해주세요
                 desc: 저는 여가 시간에 게임을 개발합니다!
-shopUpgrades:
-    belt:
-        name: 벨트, 밸런서, 터널
-        description: 속도 x<currentMult> → x<newMult>
-    miner:
-        name: 추출기
-        description: 속도 x<currentMult> → x<newMult>
-    processors:
-        name: 절단기, 회전기, 결합기
-        description: 속도 x<currentMult> → x<newMult>
-    painting:
-        name: 혼합기, 색칠기
-        description: 속도 x<currentMult> → x<newMult>
 buildings:
     hub:
         deliver: 목표
@@ -826,7 +808,6 @@ keybindings:
         mapZoomIn: 확대
         mapZoomOut: 축소
         createMarker: 마커 배치
-        menuOpenShop: 업그레이드
         menuOpenStats: 통계
         toggleHud: HUD 토글
         toggleFPSInfo: FPS와 디버그 정보 토글

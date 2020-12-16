@@ -253,11 +253,6 @@ ingame:
         newUpgrade: Un upgrade nou este disponibil!
         gameSaved: Jocul tău a fost salvat.
         freeplayLevelComplete: Level <level> has been completed!
-    shop:
-        title: Upgrade-uri
-        buttonUnlock: Upgrade
-        tier: Tier <x>
-        maximumLevel: NIVELUL MAXIM (Speed x<currentMult>)
     statistics:
         title: Statistici
         dataSources:
@@ -381,19 +376,6 @@ ingame:
             support:
                 title: Support me
                 desc: I develop it in my spare time!
-shopUpgrades:
-    belt:
-        name: Benzi, Distribuitor & Tunele
-        description: Viteza x<currentMult> → x<newMult>
-    miner:
-        name: Extractoare
-        description: Viteza x<currentMult> → x<newMult>
-    processors:
-        name: Tăiere, Rotație & Presare
-        description: Viteza x<currentMult> → x<newMult>
-    painting:
-        name: Amestecare & Pictare
-        description: Viteza x<currentMult> → x<newMult>
 buildings:
     belt:
         default:
@@ -946,7 +928,6 @@ keybindings:
         mapZoomIn: Mărește imaginea
         mapZoomOut: Micșorează imaginea
         createMarker: Creează waypoint
-        menuOpenShop: Upgrade-uri
         menuOpenStats: Statistici
         toggleHud: Comută interfața
         toggleFPSInfo: Comută FPS and Debug Info

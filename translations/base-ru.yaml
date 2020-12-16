@@ -251,11 +251,6 @@ ingame:
         newUpgrade: Новое улучшение доступно!
         gameSaved: Игра сохранена.
         freeplayLevelComplete: Уровень <level> завершён!
-    shop:
-        title: Улучшения
-        buttonUnlock: Улучшить
-        tier: Уровень <x>
-        maximumLevel: Скорость x<currentMult> (макс.)
     statistics:
         title: Статистика
         dataSources:
@@ -374,19 +369,6 @@ ingame:
             support:
                 title: Поддержите меня
                 desc: Я занимаюсь разработкой в свободное время!
-shopUpgrades:
-    belt:
-        name: Конвейеры, Разделители & Туннели
-        description: Скорость x<currentMult> → x<newMult>
-    miner:
-        name: Добыча
-        description: Скорость x<currentMult> → x<newMult>
-    processors:
-        name: Нарезка, Вращение & Объединение
-        description: Скорость x<currentMult> → x<newMult>
-    painting:
-        name: Смешивание & Покраска
-        description: Скорость x<currentMult> → x<newMult>
 buildings:
     belt:
         default:
@@ -940,7 +922,6 @@ keybindings:
         mapZoomIn: Приблизить
         mapZoomOut: Отдалить
         createMarker: Создать Маркер
-        menuOpenShop: Улучшения
         menuOpenStats: Статистика
         toggleHud: Переключить HUD
         toggleFPSInfo: Включить/выключить FPS и информацию отладки

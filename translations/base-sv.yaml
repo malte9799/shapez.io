@@ -251,11 +251,6 @@ ingame:
         newUpgrade: En ny uppgradering är tillgänglig!
         gameSaved: Ditt spel har sparats.
         freeplayLevelComplete: Nivå <level> har blivit avklarad!
-    shop:
-        title: Upgraderingar
-        buttonUnlock: Upgradera
-        tier: Tier <x>
-        maximumLevel: MAXNIVÅ (Hastighet x<currentMult>)
     statistics:
         title: Statistik
         dataSources:
@@ -378,19 +373,6 @@ ingame:
             support:
                 title: Stöd mig
                 desc: Jag utvecklar det på min fritid!
-shopUpgrades:
-    belt:
-        name: Rullband, Distributörer & Tunnlar
-        description: hastighet x<currentMult> → x<newMult>
-    miner:
-        name: Extraktion
-        description: Hastighet x<currentMult> → x<newMult>
-    processors:
-        name: Klippning, Rotering & Stapling
-        description: Hastighet x<currentMult> → x<newMult>
-    painting:
-        name: Blandning & Färgning
-        description: hastighet x<currentMult> → x<newMult>
 buildings:
     belt:
         default:
@@ -937,7 +919,6 @@ keybindings:
         mapZoomIn: Zooma in
         mapZoomOut: Zooma ut
         createMarker: Skapa Markör
-        menuOpenShop: Uppgraderingar
         menuOpenStats: Statistik
         toggleHud: Toggle HUD
         toggleFPSInfo: Toggle FPS och Debug info

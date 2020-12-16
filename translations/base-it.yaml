@@ -254,11 +254,6 @@ ingame:
         newUpgrade: È disponibile un nuovo aggiornamento!
         gameSaved: Partita salvata.
         freeplayLevelComplete: Il livello <level> è stato completato!
-    shop:
-        title: Miglioramenti
-        buttonUnlock: Sblocca
-        tier: Grado <x>
-        maximumLevel: GRADO MASSIMO (Velocità x<currentMult>)
     statistics:
         title: Statistiche
         dataSources:
@@ -381,19 +376,6 @@ ingame:
             support:
                 title: Sostienimi
                 desc: Lo sviluppo nel tempo libero!
-shopUpgrades:
-    belt:
-        name: Nastri, distribuzione e tunnel
-        description: Velocità x<currentMult> → x<newMult>
-    miner:
-        name: Estrazione
-        description: Velocità x<currentMult> → x<newMult>
-    processors:
-        name: Taglio, rotazione e impilamento
-        description: Velocità x<currentMult> → x<newMult>
-    painting:
-        name: Mix e verniciatura
-        description: Velocità x<currentMult> → x<newMult>
 buildings:
     belt:
         default:
@@ -957,7 +939,6 @@ keybindings:
         mapZoomIn: Aumenta zoom
         mapZoomOut: Riduci zoom
         createMarker: Crea Etichetta
-        menuOpenShop: Miglioramenti
         menuOpenStats: Statistiche
         toggleHud: Mostra/Nascondi HUD
         toggleFPSInfo: Mostra/Nascondi FPS e info debug

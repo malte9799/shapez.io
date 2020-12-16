@@ -256,11 +256,6 @@ ingame:
         newUpgrade: Uusi päivitys on saatavilla!
         gameSaved: Peli on tallennettu.
         freeplayLevelComplete: Taso <level> on saavutettu!
-    shop:
-        title: Päivitykset
-        buttonUnlock: Päivitä
-        tier: Taso <x>
-        maximumLevel: SUURIN TASO (Nopeus x<currentMult>)
     statistics:
         title: Tilastot
         dataSources:
@@ -372,19 +367,6 @@ ingame:
             support:
                 title: Tue minua
                 desc: Kehitän peliä vapaa-ajallani!
-shopUpgrades:
-    belt:
-        name: Kuljettimet, jakelijat & tunnelit
-        description: Nopeus x<currentMult> → x<newMult>
-    miner:
-        name: Poiminta
-        description: Nopeus x<currentMult> → x<newMult>
-    processors:
-        name: Leikkaus, kääntö & pinoaminen
-        description: Nopeus x<currentMult> → x<newMult>
-    painting:
-        name: Sekoitus & värjäys
-        description: Nopeus x<currentMult> → x<newMult>
 buildings:
     hub:
         deliver: Toimita
@@ -901,7 +883,6 @@ keybindings:
         mapZoomIn: Lähennä
         mapZoomOut: Loitonna
         createMarker: Luo merkki
-        menuOpenShop: Päivitykset
         menuOpenStats: Tilastot
         toggleHud: Vaihda valikon näkyvyys
         toggleFPSInfo: Vaihda FPS- and virheenkorjaustiedot

@@ -263,11 +263,6 @@ ingame:
         newUpgrade: Nowe ulepszenie dostępne!
         gameSaved: Postęp gry został zapisany.
         freeplayLevelComplete: Poziom <level> został ukończony!
-    shop:
-        title: Ulepszenia
-        buttonUnlock: Ulepsz
-        tier: Poziom <x>
-        maximumLevel: POZIOM MAKSYMALNY (Szybkość x<currentMult>)
     statistics:
         title: Statystyki
         dataSources:
@@ -380,19 +375,6 @@ ingame:
             support:
                 title: Wspomóż mnie
                 desc: Tworzę tą grę w swoim wolnym czasie!
-shopUpgrades:
-    belt:
-        name: Taśmociągi, Dystrybutory & Tunele
-        description: Szybkość x<currentMult> → x<newMult>
-    miner:
-        name: Wydobycie
-        description: Szybkość x<currentMult> → x<newMult>
-    processors:
-        name: Cięcie, Obrót & Sklejanie
-        description: Szybkość x<currentMult> → x<newMult>
-    painting:
-        name: Miksowanie & Malowanie
-        description: Szybkość x<currentMult> → x<newMult>
 buildings:
     hub:
         deliver: Dostarcz
@@ -950,7 +932,6 @@ keybindings:
         mapZoomIn: Przybliżenie
         mapZoomOut: Oddalenie
         createMarker: Stwórz Znacznik
-        menuOpenShop: Ulepszenia
         menuOpenStats: Statystyki
         toggleHud: Przełącz widoczność interfejsu
         toggleFPSInfo: Pokaż Licznik FPS i informacje do debugowania

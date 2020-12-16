@@ -256,11 +256,6 @@ ingame:
         newUpgrade: A new upgrade is available!
         gameSaved: Your game has been saved.
         freeplayLevelComplete: Level <level> has been completed!
-    shop:
-        title: Upgrades
-        buttonUnlock: Upgrade
-        tier: Tier <x>
-        maximumLevel: MAXIMUM LEVEL (Speed x<currentMult>)
     statistics:
         title: Statistics
         dataSources:
@@ -373,19 +368,6 @@ ingame:
             support:
                 title: Support me
                 desc: I develop it in my spare time!
-shopUpgrades:
-    belt:
-        name: Belts, Distributor & Tunnels
-        description: Speed x<currentMult> → x<newMult>
-    miner:
-        name: Extraction
-        description: Speed x<currentMult> → x<newMult>
-    processors:
-        name: Cutting, Rotating & Stacking
-        description: Speed x<currentMult> → x<newMult>
-    painting:
-        name: Mixing & Painting
-        description: Speed x<currentMult> → x<newMult>
 buildings:
     hub:
         deliver: Deliver
@@ -928,7 +910,6 @@ keybindings:
         mapZoomIn: Zoom in
         mapZoomOut: Zoom out
         createMarker: Create Marker
-        menuOpenShop: Upgrades
         menuOpenStats: Statistics
         menuClose: Close Menu
         toggleHud: Toggle HUD

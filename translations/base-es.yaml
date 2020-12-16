@@ -259,11 +259,6 @@ ingame:
         newUpgrade: ¡Una nueva mejora está disponible!
         gameSaved: Se ha guardado la partida.
         freeplayLevelComplete: ¡El nivel <level> ha sido completado!
-    shop:
-        title: Mejoras
-        buttonUnlock: Mejorar
-        tier: Nivel <x>
-        maximumLevel: NIVEL MÁXIMO (Velocidad x<currentMult>)
     statistics:
         title: Estadísticas
         dataSources:
@@ -378,19 +373,6 @@ ingame:
             support:
                 title: Apoyame
                 desc: ¡Desarrollo este juego en mi tiempo libre!
-shopUpgrades:
-    belt:
-        name: Cintas transportadoras, Distribuidores y Túneles
-        description: Velocidad x<currentMult> → x<newMult>
-    miner:
-        name: Extracción
-        description: Velocidad x<currentMult> → x<newMult>
-    processors:
-        name: Cortar, Rotar y Apilar
-        description: Velocidad x<currentMult> → x<newMult>
-    painting:
-        name: Mezclado y Pintado
-        description: Velocidad x<currentMult> → x<newMult>
 buildings:
     hub:
         deliver: Entregar
@@ -941,7 +923,6 @@ keybindings:
         mapZoomIn: Acercarse
         mapZoomOut: Alejarse
         createMarker: Crear marcador
-        menuOpenShop: Mejoras
         menuOpenStats: Estadísticas
         menuClose: Cerrar menú
         toggleHud: Activar HUD

@@ -13,19 +13,6 @@ export class HUDGameMenu extends BaseHUDPart {
 
         const buttons = [
             {
-                id: "shop",
-                label: "Upgrades",
-                handler: () => this.root.hud.parts.shop.show(),
-                keybinding: KEYMAPPINGS.ingame.menuOpenShop,
-                badge: () => this.root.hubGoals.getAvailableUpgradeCount(),
-                notification: /** @type {[string, enumNotificationType]} */ ([
-                    T.ingame.notifications.newUpgrade,
-                    enumNotificationType.upgrade,
-                ]),
-                visible: () =>
-                    !this.root.app.settings.getAllSettings().offerHints || this.root.hubGoals.level >= 3,
-            },
-            {
                 id: "stats",
                 label: "Stats",
                 handler: () => this.root.hud.parts.statistics.show(),

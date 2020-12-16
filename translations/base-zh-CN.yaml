@@ -225,11 +225,6 @@ ingame:
         newUpgrade: 有新更新啦！
         gameSaved: 游戏已保存。
         freeplayLevelComplete: Level <level> has been completed!
-    shop:
-        title: 建筑升级
-        buttonUnlock: 升级
-        tier: <x>级
-        maximumLevel: 最高级（<currentMult>倍效率）
     statistics:
         title: 统计信息
         dataSources:
@@ -344,19 +339,6 @@ ingame:
             support:
                 title: 支持作者
                 desc: 我使用闲暇时间开发游戏！
-shopUpgrades:
-    belt:
-        name: 传送带、平衡机、隧道
-        description: 效率 <currentMult>倍 → <newMult>倍
-    miner:
-        name: 开采
-        description: 效率 <currentMult>倍 → <newMult>倍
-    processors:
-        name: 切割、旋转、堆叠
-        description: 效率 <currentMult>倍 → <newMult>倍
-    painting:
-        name: 混色、上色
-        description: 效率 <currentMult>倍 → <newMult>倍
 buildings:
     belt:
         default:
@@ -852,7 +834,6 @@ keybindings:
         mapZoomIn: 放大
         mapZoomOut: 缩小
         createMarker: 创建地图标记
-        menuOpenShop: 升级菜单
         menuOpenStats: 统计菜单
         toggleHud: 开关HUD
         toggleFPSInfo: 开关帧数与调试信息

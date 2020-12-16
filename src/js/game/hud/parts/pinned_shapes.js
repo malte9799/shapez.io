@@ -66,7 +66,6 @@ export class HUDPinnedShapes extends BaseHUDPart {
     initialize() {
         // Connect to any relevant signals
         this.root.signals.storyGoalCompleted.add(this.rerenderFull, this);
-        this.root.signals.upgradePurchased.add(this.updateShapesAfterUpgrade, this);
         this.root.signals.postLoadHook.add(this.rerenderFull, this);
         this.root.hud.signals.shapePinRequested.add(this.pinNewShape, this);
         this.root.hud.signals.shapeUnpinRequested.add(this.unpinShape, this);
@@ -108,26 +107,6 @@ export class HUDPinnedShapes extends BaseHUDPart {
         }
         if (key === this.root.gameMode.getBlueprintShapeKey()) {
             return null;
-        }
-
-        // Check if this shape is required for any upgrade
-        const upgrades = this.root.gameMode.getUpgrades();
-        for (const upgradeId in upgrades) {
-            const upgradeTiers = upgrades[upgradeId];
-            const currentTier = this.root.hubGoals.getUpgradeLevel(upgradeId);
-            const tierHandle = upgradeTiers[currentTier];
-
-            if (!tierHandle) {
-                // Max level
-                continue;
-            }
-
-            for (let i = 0; i < tierHandle.required.length; ++i) {
-                const { shape, amount } = tierHandle.required[i];
-                if (shape === key) {
-                    return amount;
-                }
-            }
         }
 
         return null;

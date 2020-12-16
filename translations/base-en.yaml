@@ -353,16 +353,6 @@ ingame:
         gameSaved: Your game has been saved.
         freeplayLevelComplete: Level <level> has been completed!
 
-    # The "Upgrades" window
-    shop:
-        title: Upgrades
-        buttonUnlock: Upgrade
-
-        # Gets replaced to e.g. "Tier IX"
-        tier: Tier <x>
-
-        maximumLevel: MAXIMUM LEVEL (Speed x<currentMult>)
-
     # The "Statistics" window
     statistics:
         title: Statistics
@@ -505,21 +495,6 @@ ingame:
             support:
                 title: Support me
                 desc: I develop the game in my spare time!
-
-# All shop upgrades
-shopUpgrades:
-    belt:
-        name: Belts, Distributor & Tunnels
-        description: Speed x<currentMult> → x<newMult>
-    miner:
-        name: Extraction
-        description: Speed x<currentMult> → x<newMult>
-    processors:
-        name: Cutting, Rotating & Stacking
-        description: Speed x<currentMult> → x<newMult>
-    painting:
-        name: Mixing & Painting
-        description: Speed x<currentMult> → x<newMult>
 
 # Buildings and their name / description
 buildings:
@@ -1123,7 +1098,6 @@ keybindings:
         mapZoomOut: Zoom out
         createMarker: Create Marker
 
-        menuOpenShop: Upgrades
         menuOpenStats: Statistics
         menuClose: Close Menu
 

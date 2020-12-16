@@ -37,14 +37,6 @@
 
         @include DarkThemeInvert;
 
-        &.shop {
-            grid-column: 1;
-            & {
-                /* @load-async */
-                background-image: uiResource("icons/shop.png");
-            }
-        }
-
         &.stats {
             grid-column: 2;
             & {
@@ -109,16 +101,6 @@
         }
 
         &.hasBadge {
-            &.shop {
-                filter: none;
-                opacity: 0.9;
-
-                & {
-                    /* @load-async */
-                    background-image: uiResource("icons/shop_active.png");
-                }
-            }
-
             transform-origin: 50% 50%;
             @include InlineAnimation(0.8s ease-in-out infinite) {
                 50% {

@@ -32,11 +32,4 @@ export class GameAnalyticsInterface {
      * @param {number} level
      */
     handleLevelCompleted(level) {}
-
-    /**
-     * Handles the given upgrade completed
-     * @param {string} id
-     * @param {number} level
-     */
-    handleUpgradeUnlocked(id, level) {}
 }
