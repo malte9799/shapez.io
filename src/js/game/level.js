@@ -9,6 +9,13 @@ import { GameRoot } from "./root";
 import { getCodeFromBuildingData } from "./building_codes";
 import { gMetaBuildingRegistry } from "../core/global_registries";
 
+import trim from "trim";
+import { enumColors } from "./colors";
+import { BOOL_FALSE_SINGLETON, BOOL_TRUE_SINGLETON } from "./items/boolean_item";
+import { COLOR_ITEM_SINGLETONS } from "./items/color_item";
+import { ShapeDefinition } from "./shape_definition";
+
+
 const rotation = {
     "top": 0,
     "right": 90,
@@ -56,7 +63,7 @@ export class Level {
      * @param {GameRoot} param0.root
      */
     createLevel(root) {
-        const originChunk = new Vector(this.lvlNum % 5, Math.floor(this.lvlNum/5));
+        const originChunk = new Vector((this.lvlNum % 5) * 2, Math.floor(this.lvlNum/5) * 2);
         const dimensions = this.getDimensions();
         this.x = originChunk.x * globalConfig.mapChunkSize + globalConfig.mapChunkSize - Math.round(dimensions.x / 2)
         this.y = originChunk.y * globalConfig.mapChunkSize + globalConfig.mapChunkSize - Math.round(dimensions.y / 2)
@@ -64,7 +71,7 @@ export class Level {
         const lvlBuildings = this.setupLevel(root)
         for (let i in lvlBuildings) {
             const param = lvlBuildings[i]
-            let test = gMetaBuildingRegistry.findById(param[0]).createEntity({
+            let entity = gMetaBuildingRegistry.findById(param[0]).createEntity({
                 root: this.root,
                 origin: new Vector(this.x + param[1].x, this.y + param[1].y),
                 rotation: rotation[param[2]],
@@ -72,27 +79,43 @@ export class Level {
                 rotationVariant: param[4],
                 variant: param[5]
             })
-            root.map.placeStaticEntity(test);
-            root.entityMgr.registerEntity(test);
+            if (param.length >= 7 && param[0] == "item_producer") {
+                entity.components.ItemProducer.item = this.parseSignalCode(root, param[6]);
+            }
+            root.map.placeStaticEntity(entity);
+            root.entityMgr.registerEntity(entity);
         };
-
-
-        // const entity = new Entity(root);
-        // entity.addComponent(
-        //     new StaticMapEntityComponent({
-        //         origin: new Vector(this.x, this.y),
-        //         rotation: 0,
-        //         originalRotation: 0,
-        //         tileSize: new Vector(1, 1),
-        //         code: getCodeFromBuildingData(this, variant, rotationVariant),
-        //     })
-        // );
-        // this.setupEntityComponents(entity, root);
-        // this.updateVariants(entity, rotationVariant, variant);
-        // return entity;
     }
 
-    addBuilding() {
+    /**
+     * Tries to parse a signal code
+     * @param {string} code
+     * @returns {BaseItem}
+     */
+    parseSignalCode(root, code) {
+        if (!root || !root.shapeDefinitionMgr) {
+            // Stale reference
+            return null;
+        }
 
-    }
+        code = trim(code);
+        const codeLower = code.toLowerCase();
+
+        if (enumColors[codeLower]) {
+            return COLOR_ITEM_SINGLETONS[codeLower];
+        }
+        if (code === "1" || codeLower === "true") {
+            return BOOL_TRUE_SINGLETON;
+        }
+
+        if (code === "0" || codeLower === "false") {
+            return BOOL_FALSE_SINGLETON;
+        }
+
+        if (ShapeDefinition.isValidShortKey(code)) {
+            return root.shapeDefinitionMgr.getShapeItemFromShortKey(code);
+        }
+
+        return null;
+    };
 }

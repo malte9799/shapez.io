@@ -16,8 +16,8 @@ export class Level_5 extends Level {
     setupLevel(root) {
         return [
             ["hub", new Vector(6, 1), "left", 0, 0, "default"],
-            ["item_producer", new Vector(0, 1), "right", 0, 0, "default"],
-            ["item_producer", new Vector(3, 0), "bottom", 0, 0, "default"],
+            ["item_producer", new Vector(0, 1), "right", 0, 0, "default", "CuRuSuRu"],
+            ["item_producer", new Vector(3, 0), "bottom", 0, 0, "default", "--Cu----"],
         ]
     }
 }
