@@ -18,6 +18,10 @@ export class MetaItemProducerBuilding extends MetaBuilding {
         return true;
     }
 
+    getIsRemovable() {
+        return false;
+    }
+
     /**
      * Creates the entity at the given location
      * @param {Entity} entity
@@ -39,6 +43,6 @@ export class MetaItemProducerBuilding extends MetaBuilding {
                 ],
             })
         );
-        entity.addComponent(new ItemProducerComponent());
+        entity.addComponent(new ItemProducerComponent({}));
     }
 }
