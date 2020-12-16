@@ -12,7 +12,6 @@ import { enumMouseButton } from "../../camera";
 import { T } from "../../../translations";
 import { KEYMAPPINGS } from "../../key_action_mapper";
 import { THEME } from "../../theme";
-import { enumHubGoalRewards } from "../../tutorial_goals";
 import { Blueprint } from "../../blueprint";
 
 const logger = createLogger("hud/mass_selector");
@@ -121,13 +120,6 @@ export class HUDMassSelector extends BaseHUDPart {
 
     startCopy() {
         if (this.selectedUids.size > 0) {
-            if (!this.root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_blueprints)) {
-                this.root.hud.parts.dialogs.showInfo(
-                    T.dialogs.blueprintsNotUnlocked.title,
-                    T.dialogs.blueprintsNotUnlocked.desc
-                );
-                return;
-            }
             this.root.hud.signals.buildingsSelectedForCopy.dispatch(Array.from(this.selectedUids));
             this.selectedUids = new Set();
             this.root.soundProxy.playUiClick();
@@ -137,12 +129,7 @@ export class HUDMassSelector extends BaseHUDPart {
     }
 
     confirmCut() {
-        if (!this.root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_blueprints)) {
-            this.root.hud.parts.dialogs.showInfo(
-                T.dialogs.blueprintsNotUnlocked.title,
-                T.dialogs.blueprintsNotUnlocked.desc
-            );
-        } else if (
+        if (
             !this.root.app.settings.getAllSettings().disableCutDeleteWarnings &&
             this.selectedUids.size > 100
         ) {

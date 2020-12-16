@@ -5,7 +5,6 @@ import { Loader } from "../../../core/loader";
 import { lerp } from "../../../core/utils";
 import { SOUNDS } from "../../../platform/sound";
 import { KEYMAPPINGS } from "../../key_action_mapper";
-import { enumHubGoalRewards } from "../../tutorial_goals";
 import { BaseHUDPart } from "../base_hud_part";
 
 const copy = require("clipboard-copy");
@@ -29,12 +28,7 @@ export class HUDWiresOverlay extends BaseHUDPart {
      */
     switchLayers() {
         if (this.root.currentLayer === "regular") {
-            if (
-                this.root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_wires_painter_and_levers) ||
-                (G_IS_DEV && globalConfig.debug.allBuildingsUnlocked)
-            ) {
-                this.root.currentLayer = "wires";
-            }
+            this.root.currentLayer = "wires";
         } else {
             this.root.currentLayer = "regular";
         }

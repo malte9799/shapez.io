@@ -4,7 +4,6 @@ import { arrayDeleteValue, formatBigNumber, makeDiv } from "../../../core/utils"
 import { T } from "../../../translations";
 import { enumAnalyticsDataSource } from "../../production_analytics";
 import { ShapeDefinition } from "../../shape_definition";
-import { enumHubGoalRewards } from "../../tutorial_goals";
 import { BaseHUDPart } from "../base_hud_part";
 
 /**
@@ -158,13 +157,11 @@ export class HUDPinnedShapes extends BaseHUDPart {
         });
 
         // Pin blueprint shape as well
-        if (this.root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_blueprints)) {
-            this.internalPinShape({
-                key: this.root.gameMode.getBlueprintShapeKey(),
-                canUnpin: false,
-                className: "blueprint",
-            });
-        }
+        this.internalPinShape({
+            key: this.root.gameMode.getBlueprintShapeKey(),
+            canUnpin: false,
+            className: "blueprint",
+        });
 
         // Pin manually pinned shapes
         for (let i = 0; i < this.pinnedShapes.length; ++i) {
