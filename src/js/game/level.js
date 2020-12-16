@@ -82,9 +82,31 @@ export class Level {
             if (param.length >= 7 && param[0] == "item_producer") {
                 entity.components.ItemProducer.item = this.parseSignalCode(root, param[6]);
             }
-            root.map.placeStaticEntity(entity);
+            root.map.   placeStaticEntity(entity);
             root.entityMgr.registerEntity(entity);
         };
+
+        // console.log(root.map.getTileContent(tile, "regular"));
+
+        for (var x = 0; x <= dimensions.x - 1; x++) {
+            for (var y = 0; y <= dimensions.y - 1; y++) {
+                if (y != 0 && y != dimensions.y - 1 && x != 0 && x != dimensions.x - 1) {
+                    continue;
+                }
+                if (!root.map.getTileContent(new Vector(x + this.x, y + this.y), "regular")) {
+                    let entity = gMetaBuildingRegistry.findById("wall").createEntity({
+                        root: this.root,
+                        origin: new Vector(x + this.x, y + this.y),
+                        rotation: 0,
+                        originalRotation: 0,
+                        rotationVariant: 0,
+                        variant: "default"
+                    });
+                    root.map.placeStaticEntity(entity);
+                    root.entityMgr.registerEntity(entity);
+                }
+            }
+        }
     }
 
     /**

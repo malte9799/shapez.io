@@ -26,6 +26,7 @@ import { enumUndergroundBeltVariants, MetaUndergroundBeltBuilding } from "./buil
 import { enumVirtualProcessorVariants, MetaVirtualProcessorBuilding } from "./buildings/virtual_processor";
 import { MetaWireBuilding } from "./buildings/wire";
 import { MetaWireTunnelBuilding } from "./buildings/wire_tunnel";
+import { MetaWallBuilding } from "./buildings/wall";
 import { buildBuildingCodeCache, gBuildingVariants, registerBuildingVariant } from "./building_codes";
 import { enumWireVariant } from "./components/wire";
 import { KEYMAPPINGS } from "./key_action_mapper";
@@ -59,6 +60,7 @@ export function initMetaBuildingRegistry() {
     gMetaBuildingRegistry.register(MetaAnalyzerBuilding);
     gMetaBuildingRegistry.register(MetaComparatorBuilding);
     gMetaBuildingRegistry.register(MetaItemProducerBuilding);
+    gMetaBuildingRegistry.register(MetaWallBuilding);
 
     // Belt
     registerBuildingVariant(1, MetaBeltBuilding, defaultBuildingVariant, 0);
@@ -165,6 +167,9 @@ export function initMetaBuildingRegistry() {
     // Item producer
     registerBuildingVariant(61, MetaItemProducerBuilding);
 
+    // Wall
+    registerBuildingVariant(62, MetaWallBuilding);
+
     // Propagate instances
     for (const key in gBuildingVariants) {
         gBuildingVariants[key].metaInstance = gMetaBuildingRegistry.findByClass(
@@ -188,7 +193,7 @@ export function initMetaBuildingRegistry() {
     if (G_IS_DEV) {
         gMetaBuildingRegistry.entries.forEach(metaBuilding => {
             const id = metaBuilding.getId();
-            if (!["hub"].includes(id)) {
+            if (!["hub"].includes(id) && !["wall"].includes(id)) {
                 if (!KEYMAPPINGS.buildings[id]) {
                     assertAlways(
                         false,
