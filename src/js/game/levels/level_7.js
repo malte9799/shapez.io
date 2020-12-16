@@ -16,10 +16,10 @@ export class Level_7 extends Level {
     setupLevel(root) {
         return [
             ["hub", new Vector(7, 4), "left", 0, 0, "default"],
-            ["item_producer", new Vector(0, 1), "bottom", 0, 0, "default"],
-            ["item_producer", new Vector(0, 2), "bottom", 0, 0, "default"],
-            ["item_producer", new Vector(0, 6), "bottom", 0, 0, "default"],
-            ["item_producer", new Vector(6, 4), "top", 0, 0, "default"],
+            ["item_producer", new Vector(1, 0), "bottom", 0, 0, "default"],
+            ["item_producer", new Vector(2, 0), "bottom", 0, 0, "default"],
+            ["item_producer", new Vector(6, 0), "bottom", 0, 0, "default"],
+            ["item_producer", new Vector(4, 6), "top", 0, 0, "default"],
         ]
     }
 }

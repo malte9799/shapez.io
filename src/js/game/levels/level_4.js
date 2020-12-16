@@ -17,9 +17,9 @@ export class Level_4 extends Level {
         return [
             ["hub", new Vector(6, 4), "left", 0, 0, "default"],
             ["item_producer", new Vector(0, 1), "right", 0, 0, "default"],
-            ["item_producer", new Vector(5, 2), "top", 0, 0, "default"],
-            ["item_producer", new Vector(5, 3), "top", 0, 0, "default"],
-            ["item_producer", new Vector(5, 4), "top", 0, 0, "default"],
+            ["item_producer", new Vector(2, 5), "top", 0, 0, "default"],
+            ["item_producer", new Vector(3, 5), "top", 0, 0, "default"],
+            ["item_producer", new Vector(4, 5), "top", 0, 0, "default"],
         ]
     }
 }
