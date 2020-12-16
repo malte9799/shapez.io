@@ -11,7 +11,7 @@ import {
 import { globalConfig } from "../core/config";
 import { getDeviceDPI, resizeHighDPICanvas } from "../core/dpi_manager";
 import { DrawParameters } from "../core/draw_parameters";
-import { gMetaBuildingRegistry } from "../core/global_registries";
+import { gMetaBuildingRegistry, gLevelRegistry } from "../core/global_registries";
 import { createLogger } from "../core/logging";
 import { Rectangle } from "../core/rectangle";
 import { ORIGINAL_SPRITE_SCALE } from "../core/sprites";
@@ -37,6 +37,15 @@ import { GameRoot } from "./root";
 import { ShapeDefinitionManager } from "./shape_definition_manager";
 import { SoundProxy } from "./sound_proxy";
 import { GameTime } from "./time/game_time";
+
+import { Level_1 } from "./levels/level_1";
+import { Level_2 } from "./levels/level_2";
+import { Level_3 } from "./levels/level_3";
+import { Level_4 } from "./levels/level_4";
+import { Level_5 } from "./levels/level_5";
+import { Level_6 } from "./levels/level_6";
+import { Level_7 } from "./levels/level_7";
+import { Level_8 } from "./levels/level_8";
 
 const logger = createLogger("ingame/core");
 
@@ -163,17 +172,26 @@ export class GameCore {
         this.root.gameIsFresh = true;
         this.root.map.seed = randomInt(0, 100000);
 
-        // Place the hub
-        const hub = gMetaBuildingRegistry.findByClass(MetaHubBuilding).createEntity({
-            root: this.root,
-            origin: new Vector(-2, -2),
-            rotation: 0,
-            originalRotation: 0,
-            rotationVariant: 0,
-            variant: defaultBuildingVariant,
-        });
-        this.root.map.placeStaticEntity(hub);
-        this.root.entityMgr.registerEntity(hub);
+        // // Place the hub
+        // const hub = gMetaBuildingRegistry.findByClass(MetaHubBuilding).createEntity({
+        //     root: this.root,
+        //     origin: new Vector(-2, -2),
+        //     rotation: 0,
+        //     originalRotation: 0,
+        //     rotationVariant: 0,
+        //     variant: defaultBuildingVariant,
+        // });
+        // this.root.map.placeStaticEntity(hub);
+        // this.root.entityMgr.registerEntity(hub);
+
+        gLevelRegistry.findByClass(Level_1).createLevel(this.root)
+        gLevelRegistry.findByClass(Level_2).createLevel(this.root)
+        gLevelRegistry.findByClass(Level_3).createLevel(this.root)
+        gLevelRegistry.findByClass(Level_4).createLevel(this.root)
+        gLevelRegistry.findByClass(Level_5).createLevel(this.root)
+        gLevelRegistry.findByClass(Level_6).createLevel(this.root)
+        gLevelRegistry.findByClass(Level_7).createLevel(this.root)
+        gLevelRegistry.findByClass(Level_8).createLevel(this.root)
     }
 
     /**
@@ -183,7 +201,6 @@ export class GameCore {
     initExistingGame() {
         logger.log("Initializing existing game");
         const serializer = new SavegameSerializer();
-
         try {
             const status = serializer.deserialize(this.root.savegame.getCurrentDump(), this.root);
             if (!status.isGood()) {
