@@ -77,12 +77,12 @@ export class HubSystem extends GameSystemWithFilter {
         }
 
         const definition = this.root.hubGoals.currentGoal.definition;
-        definition.drawCentered(45, 58, parameters, 36);
+        definition.drawCentered(w / 2, 12, parameters, 15  );
 
         const goals = this.root.hubGoals.currentGoal;
 
-        const textOffsetX = 70;
-        const textOffsetY = 61;
+        const textOffsetX = 16;
+        const textOffsetY = 26;
 
         if (goals.throughputOnly) {
             // Throughput
@@ -91,9 +91,9 @@ export class HubSystem extends GameSystemWithFilter {
                 formatBigNumber(goals.required)
             );
 
-            context.font = "bold 12px GameFont";
+            context.font = "bold 6px GameFont";
             context.fillStyle = "#64666e";
-            context.textAlign = "left";
+            context.textAlign = "center";
             context.fillText(deliveredText, textOffsetX, textOffsetY);
         } else {
             // Deliver count
@@ -101,60 +101,21 @@ export class HubSystem extends GameSystemWithFilter {
             const deliveredText = "" + formatBigNumber(delivered);
 
             if (delivered > 9999) {
-                context.font = "bold 16px GameFont";
+                context.font = "bold 6px GameFont";
             } else if (delivered > 999) {
-                context.font = "bold 20px GameFont";
+                context.font = "bold 6px GameFont";
             } else {
-                context.font = "bold 25px GameFont";
+                context.font = "bold 8px GameFont";
             }
             context.fillStyle = "#64666e";
-            context.textAlign = "left";
+            context.textAlign = "center";
             context.fillText(deliveredText, textOffsetX, textOffsetY);
 
-            // Required
-            context.font = "13px GameFont";
-            context.fillStyle = "#a4a6b0";
-            context.fillText("/ " + formatBigNumber(goals.required), textOffsetX, textOffsetY + 13);
+            // // Required
+            // context.font = "6px GameFont";
+            // context.fillStyle = "#a4a6b0";
+            // context.fillText("/ " + formatBigNumber(goals.required), textOffsetX+14, textOffsetY);
         }
-
-        // Reward
-        const rewardText = T.storyRewards[goals.reward].title.toUpperCase();
-        if (rewardText.length > 12) {
-            context.font = "bold 8px GameFont";
-        } else {
-            context.font = "bold 10px GameFont";
-        }
-        context.fillStyle = "#fd0752";
-        context.textAlign = "center";
-
-        context.fillText(rewardText, HUB_SIZE_PIXELS / 2, 105);
-
-        // Level "8"
-        context.font = "bold 10px GameFont";
-        context.fillStyle = "#fff";
-        context.fillText("" + this.root.hubGoals.level, 27, 32);
-
-        // "LVL"
-        context.textAlign = "center";
-        context.fillStyle = "#fff";
-        context.font = "bold 6px GameFont";
-        context.fillText(T.buildings.hub.levelShortcut, 27, 22);
-
-        // "Deliver"
-        context.fillStyle = "#64666e";
-        context.font = "bold 10px GameFont";
-        context.fillText(T.buildings.hub.deliver.toUpperCase(), HUB_SIZE_PIXELS / 2, 30);
-
-        // "To unlock"
-        const unlockText = T.buildings.hub.toUnlock.toUpperCase();
-        if (unlockText.length > 15) {
-            context.font = "bold 8px GameFont";
-        } else {
-            context.font = "bold 10px GameFont";
-        }
-        context.fillText(T.buildings.hub.toUnlock.toUpperCase(), HUB_SIZE_PIXELS / 2, 92);
-
-        context.textAlign = "left";
     }
 
     /**
@@ -175,8 +136,8 @@ export class HubSystem extends GameSystemWithFilter {
         const canvas = parameters.root.buffers.getForKey({
             key: "hub",
             subKey: dpi + "/" + this.root.hubGoals.level + "/" + deliveredText,
-            w: globalConfig.tileSize * 4,
-            h: globalConfig.tileSize * 4,
+            w: globalConfig.tileSize,
+            h: globalConfig.tileSize,
             dpi,
             redrawMethod: this.redrawHubBaseTexture.bind(this),
         });
@@ -185,9 +146,9 @@ export class HubSystem extends GameSystemWithFilter {
         drawSpriteClipped({
             parameters,
             sprite: canvas,
-            x: staticComp.origin.x * globalConfig.tileSize - extrude,
-            y: staticComp.origin.y * globalConfig.tileSize - extrude,
-            w: HUB_SIZE_PIXELS + 2 * extrude,
+            x: staticComp.origin.x * globalConfig.tileSize - 2,
+            y: staticComp.origin.y * globalConfig.tileSize - 2,
+            w: HUB_SIZE_PIXELS + 2   * extrude,
             h: HUB_SIZE_PIXELS + 2 * extrude,
             originalW: HUB_SIZE_PIXELS * dpi,
             originalH: HUB_SIZE_PIXELS * dpi,
