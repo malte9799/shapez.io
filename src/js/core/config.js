@@ -55,7 +55,7 @@ export const globalConfig = {
 
     // Belt speeds
     // NOTICE: Update webpack.production.config too!
-    beltSpeedItemsPerSecond: 2,
+    beltSpeedItemsPerSecond: 10,
     minerSpeedItemsPerSecond: 0, // COMPUTED
 
     defaultItemDiameter: 20,
