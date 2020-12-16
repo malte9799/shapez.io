@@ -56,7 +56,7 @@ export class Level {
      * @param {GameRoot} param0.root
      */
     createLevel(root) {
-        const originChunk = new Vector(this.lvlNum % 5, Math.ceil(this.lvlnum/5) - 1);
+        const originChunk = new Vector(this.lvlNum % 5, Math.floor(this.lvlNum/5));
         const dimensions = this.getDimensions();
         this.x = originChunk.x * globalConfig.mapChunkSize + globalConfig.mapChunkSize - Math.round(dimensions.x / 2)
         this.y = originChunk.y * globalConfig.mapChunkSize + globalConfig.mapChunkSize - Math.round(dimensions.y / 2)
