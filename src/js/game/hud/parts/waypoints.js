@@ -102,12 +102,12 @@ export class HUDWaypoints extends BaseHUDPart {
         /** @type {Array<Waypoint>}
          */
         this.waypoints = [
-            {
-                label: null,
-                center: { x: 0, y: 0 },
-                zoomLevel: 3,
-                layer: gMetaBuildingRegistry.findByClass(MetaHubBuilding).getLayer(),
-            },
+            // {
+            //     label: null,
+            //     center: { x: 0, y: 0 },
+            //     zoomLevel: 3,
+            //     layer: gMetaBuildingRegistry.findByClass(MetaHubBuilding).getLayer(),
+            // },
         ];
 
         // Create a buffer we can use to measure text
