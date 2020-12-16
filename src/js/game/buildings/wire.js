@@ -6,7 +6,6 @@ import { enumWireType, enumWireVariant, WireComponent } from "../components/wire
 import { Entity } from "../entity";
 import { defaultBuildingVariant, MetaBuilding } from "../meta_building";
 import { GameRoot } from "../root";
-import { enumHubGoalRewards } from "../tutorial_goals";
 
 export const arrayWireRotationVariantToType = [
     enumWireType.forward,
@@ -76,13 +75,6 @@ export class MetaWireBuilding extends MetaBuilding {
 
     getIsReplaceable() {
         return true;
-    }
-
-    /**
-     * @param {GameRoot} root
-     */
-    getIsUnlocked(root) {
-        return root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_wires_painter_and_levers);
     }
 
     /**

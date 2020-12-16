@@ -5,7 +5,6 @@ import { enumItemProcessorTypes, ItemProcessorComponent } from "../components/it
 import { Entity } from "../entity";
 import { MetaBuilding } from "../meta_building";
 import { GameRoot } from "../root";
-import { enumHubGoalRewards } from "../tutorial_goals";
 
 const overlayMatrix = generateMatrixRotations([1, 1, 0, 1, 1, 1, 0, 1, 1]);
 
@@ -28,13 +27,6 @@ export class MetaTrashBuilding extends MetaBuilding {
 
     getSpecialOverlayRenderMatrix(rotation) {
         return overlayMatrix[rotation];
-    }
-
-    /**
-     * @param {GameRoot} root
-     */
-    getIsUnlocked(root) {
-        return root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_cutter_and_trash);
     }
 
     /**

@@ -4,7 +4,6 @@ import { Entity } from "../entity";
 import { MetaBuilding } from "../meta_building";
 import { GameRoot } from "../root";
 import { DisplayComponent } from "../components/display";
-import { enumHubGoalRewards } from "../tutorial_goals";
 
 export class MetaDisplayBuilding extends MetaBuilding {
     constructor() {
@@ -13,13 +12,6 @@ export class MetaDisplayBuilding extends MetaBuilding {
 
     getSilhouetteColor() {
         return "#aaaaaa";
-    }
-
-    /**
-     * @param {GameRoot} root
-     */
-    getIsUnlocked(root) {
-        return root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_display);
     }
 
     getDimensions() {

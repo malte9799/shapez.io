@@ -5,7 +5,6 @@ import { enumPinSlotType, WiredPinsComponent } from "../components/wired_pins";
 import { Entity } from "../entity";
 import { defaultBuildingVariant, MetaBuilding } from "../meta_building";
 import { GameRoot } from "../root";
-import { enumHubGoalRewards } from "../tutorial_goals";
 
 /** @enum {string} */
 export const enumTransistorVariants = {
@@ -24,13 +23,6 @@ export class MetaTransistorBuilding extends MetaBuilding {
 
     getSilhouetteColor() {
         return "#bc3a61";
-    }
-
-    /**
-     * @param {GameRoot} root
-     */
-    getIsUnlocked(root) {
-        return root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_logic_gates);
     }
 
     /** @returns {"wires"} **/

@@ -11,7 +11,6 @@ import {
 import { Entity } from "../entity";
 import { defaultBuildingVariant, MetaBuilding } from "../meta_building";
 import { GameRoot } from "../root";
-import { enumHubGoalRewards } from "../tutorial_goals";
 import { WiredPinsComponent, enumPinSlotType } from "../components/wired_pins";
 
 /** @enum {string} */
@@ -67,21 +66,12 @@ export class MetaPainterBuilding extends MetaBuilding {
      * @param {GameRoot} root
      */
     getAvailableVariants(root) {
-        let variants = [defaultBuildingVariant, enumPainterVariants.mirrored];
-        if (root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_painter_double)) {
-            variants.push(enumPainterVariants.double);
-        }
-        if (root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_wires_painter_and_levers)) {
-            variants.push(enumPainterVariants.quad);
-        }
-        return variants;
-    }
-
-    /**
-     * @param {GameRoot} root
-     */
-    getIsUnlocked(root) {
-        return root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_painter);
+        return [
+            defaultBuildingVariant,
+            enumPainterVariants.mirrored,
+            enumPainterVariants.double,
+            enumPainterVariants.quad
+        ];
     }
 
     /**

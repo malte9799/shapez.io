@@ -8,7 +8,6 @@ import { enumPinSlotType, WiredPinsComponent } from "../components/wired_pins";
 import { Entity } from "../entity";
 import { MetaBuilding } from "../meta_building";
 import { GameRoot } from "../root";
-import { enumHubGoalRewards } from "../tutorial_goals";
 
 export class MetaFilterBuilding extends MetaBuilding {
     constructor() {
@@ -17,13 +16,6 @@ export class MetaFilterBuilding extends MetaBuilding {
 
     getSilhouetteColor() {
         return "#c45c2e";
-    }
-
-    /**
-     * @param {GameRoot} root
-     */
-    getIsUnlocked(root) {
-        return root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_filter);
     }
 
     getDimensions() {

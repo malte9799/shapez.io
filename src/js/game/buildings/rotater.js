@@ -7,7 +7,6 @@ import { enumItemProcessorTypes, ItemProcessorComponent } from "../components/it
 import { Entity } from "../entity";
 import { defaultBuildingVariant, MetaBuilding } from "../meta_building";
 import { GameRoot } from "../root";
-import { enumHubGoalRewards } from "../tutorial_goals";
 
 /** @enum {string} */
 export const enumRotaterVariants = { ccw: "ccw", rotate180: "rotate180" };
@@ -69,21 +68,11 @@ export class MetaRotaterBuilding extends MetaBuilding {
      * @param {GameRoot} root
      */
     getAvailableVariants(root) {
-        let variants = [defaultBuildingVariant];
-        if (root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_rotater_ccw)) {
-            variants.push(enumRotaterVariants.ccw);
-        }
-        if (root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_rotater_180)) {
-            variants.push(enumRotaterVariants.rotate180);
-        }
-        return variants;
-    }
-
-    /**
-     * @param {GameRoot} root
-     */
-    getIsUnlocked(root) {
-        return root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_rotater);
+        return [
+            defaultBuildingVariant,
+            enumRotaterVariants.ccw,
+            enumRotaterVariants.rotate180
+        ];
     }
 
     /**

@@ -4,7 +4,6 @@ import { MinerComponent } from "../components/miner";
 import { Entity } from "../entity";
 import { MetaBuilding, defaultBuildingVariant } from "../meta_building";
 import { GameRoot } from "../root";
-import { enumHubGoalRewards } from "../tutorial_goals";
 import { T } from "../../translations";
 import { formatItemsPerSecond, generateMatrixRotations } from "../../core/utils";
 
@@ -40,10 +39,7 @@ export class MetaMinerBuilding extends MetaBuilding {
      * @param {GameRoot} root
      */
     getAvailableVariants(root) {
-        if (root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_miner_chainable)) {
-            return [enumMinerVariants.chainable];
-        }
-        return super.getAvailableVariants(root);
+        return [enumMinerVariants.chainable];
     }
 
     /**

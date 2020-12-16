@@ -7,7 +7,6 @@ import { enumItemProcessorTypes, ItemProcessorComponent } from "../components/it
 import { Entity } from "../entity";
 import { MetaBuilding } from "../meta_building";
 import { GameRoot } from "../root";
-import { enumHubGoalRewards } from "../tutorial_goals";
 
 export class MetaStackerBuilding extends MetaBuilding {
     constructor() {
@@ -30,13 +29,6 @@ export class MetaStackerBuilding extends MetaBuilding {
     getAdditionalStatistics(root, variant) {
         const speed = root.hubGoals.getProcessorBaseSpeed(enumItemProcessorTypes.stacker);
         return [[T.ingame.buildingPlacement.infoTexts.speed, formatItemsPerSecond(speed)]];
-    }
-
-    /**
-     * @param {GameRoot} root
-     */
-    getIsUnlocked(root) {
-        return root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_stacker);
     }
 
     /**

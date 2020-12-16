@@ -8,7 +8,6 @@ import { enumPinSlotType, WiredPinsComponent } from "../components/wired_pins";
 import { Entity } from "../entity";
 import { MetaBuilding } from "../meta_building";
 import { GameRoot } from "../root";
-import { enumHubGoalRewards } from "../tutorial_goals";
 
 const storageSize = 5000;
 
@@ -30,13 +29,6 @@ export class MetaStorageBuilding extends MetaBuilding {
 
     getDimensions() {
         return new Vector(2, 2);
-    }
-
-    /**
-     * @param {GameRoot} root
-     */
-    getIsUnlocked(root) {
-        return root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_storage);
     }
 
     /**

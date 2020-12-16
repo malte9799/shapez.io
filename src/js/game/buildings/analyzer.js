@@ -5,7 +5,6 @@ import { enumPinSlotType, WiredPinsComponent } from "../components/wired_pins";
 import { Entity } from "../entity";
 import { MetaBuilding } from "../meta_building";
 import { GameRoot } from "../root";
-import { enumHubGoalRewards } from "../tutorial_goals";
 
 const overlayMatrix = generateMatrixRotations([1, 1, 0, 1, 1, 1, 0, 1, 0]);
 
@@ -16,13 +15,6 @@ export class MetaAnalyzerBuilding extends MetaBuilding {
 
     getSilhouetteColor() {
         return "#3a52bc";
-    }
-
-    /**
-     * @param {GameRoot} root
-     */
-    getIsUnlocked(root) {
-        return root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_virtual_processing);
     }
 
     /** @returns {"wires"} **/

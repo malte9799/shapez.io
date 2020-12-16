@@ -7,7 +7,6 @@ import { enumItemProcessorTypes, ItemProcessorComponent } from "../components/it
 import { Entity } from "../entity";
 import { defaultBuildingVariant, MetaBuilding } from "../meta_building";
 import { GameRoot } from "../root";
-import { enumHubGoalRewards } from "../tutorial_goals";
 
 /** @enum {string} */
 export const enumCutterVariants = { quad: "quad" };
@@ -50,17 +49,7 @@ export class MetaCutterBuilding extends MetaBuilding {
      * @param {GameRoot} root
      */
     getAvailableVariants(root) {
-        if (root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_cutter_quad)) {
-            return [defaultBuildingVariant, enumCutterVariants.quad];
-        }
-        return super.getAvailableVariants(root);
-    }
-
-    /**
-     * @param {GameRoot} root
-     */
-    getIsUnlocked(root) {
-        return root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_cutter_and_trash);
+        return [defaultBuildingVariant, enumCutterVariants.quad];
     }
 
     /**

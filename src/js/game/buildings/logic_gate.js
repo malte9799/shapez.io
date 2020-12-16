@@ -5,7 +5,6 @@ import { MetaBuilding, defaultBuildingVariant } from "../meta_building";
 import { GameRoot } from "../root";
 import { enumLogicGateType, LogicGateComponent } from "../components/logic_gate";
 import { generateMatrixRotations } from "../../core/utils";
-import { enumHubGoalRewards } from "../tutorial_goals";
 
 /** @enum {string} */
 export const enumLogicGateVariants = {
@@ -43,13 +42,6 @@ export class MetaLogicGateBuilding extends MetaBuilding {
 
     getSilhouetteColor(variant) {
         return colors[variant];
-    }
-
-    /**
-     * @param {GameRoot} root
-     */
-    getIsUnlocked(root) {
-        return root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_logic_gates);
     }
 
     /** @returns {"wires"} **/

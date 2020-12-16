@@ -7,7 +7,6 @@ import { Entity } from "../entity";
 import { MetaBuilding, defaultBuildingVariant } from "../meta_building";
 import { GameRoot } from "../root";
 import { globalConfig } from "../../core/config";
-import { enumHubGoalRewards } from "../tutorial_goals";
 import { formatItemsPerSecond, generateMatrixRotations } from "../../core/utils";
 import { T } from "../../translations";
 
@@ -85,10 +84,10 @@ export class MetaUndergroundBeltBuilding extends MetaBuilding {
      * @param {GameRoot} root
      */
     getAvailableVariants(root) {
-        if (root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_underground_belt_tier_2)) {
-            return [defaultBuildingVariant, enumUndergroundBeltVariants.tier2];
-        }
-        return super.getAvailableVariants(root);
+        return [
+            defaultBuildingVariant,
+            enumUndergroundBeltVariants.tier2
+        ];
     }
 
     /**
@@ -137,13 +136,6 @@ export class MetaUndergroundBeltBuilding extends MetaBuilding {
      */
     getSprite(rotationVariant, variant) {
         return this.getPreviewSprite(rotationVariant, variant);
-    }
-
-    /**
-     * @param {GameRoot} root
-     */
-    getIsUnlocked(root) {
-        return root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_tunnel);
     }
 
     /**

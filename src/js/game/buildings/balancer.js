@@ -5,7 +5,6 @@ import { enumItemProcessorTypes, ItemProcessorComponent } from "../components/it
 import { Entity } from "../entity";
 import { MetaBuilding, defaultBuildingVariant } from "../meta_building";
 import { GameRoot } from "../root";
-import { enumHubGoalRewards } from "../tutorial_goals";
 import { T } from "../../translations";
 import { formatItemsPerSecond, generateMatrixRotations } from "../../core/utils";
 import { BeltUnderlaysComponent } from "../components/belt_underlays";
@@ -88,25 +87,15 @@ export class MetaBalancerBuilding extends MetaBuilding {
      * @param {GameRoot} root
      */
     getAvailableVariants(root) {
-        let available = [defaultBuildingVariant];
-
-        if (root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_merger)) {
-            available.push(enumBalancerVariants.merger, enumBalancerVariants.mergerInverse);
-        }
-
-        if (root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_splitter)) {
-            available.push(enumBalancerVariants.splitter, enumBalancerVariants.splitterInverse);
-        }
-
-        return available;
+        return [
+            defaultBuildingVariant,
+            enumBalancerVariants.merger,
+            enumBalancerVariants.mergerInverse,
+            enumBalancerVariants.splitter,
+            enumBalancerVariants.splitterInverse,
+        ];
     }
 
-    /**
-     * @param {GameRoot} root
-     */
-    getIsUnlocked(root) {
-        return root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_balancer);
-    }
 
     /**
      * Creates the entity at the given location

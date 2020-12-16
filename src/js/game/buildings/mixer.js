@@ -7,7 +7,6 @@ import { enumItemProcessorTypes, ItemProcessorComponent } from "../components/it
 import { Entity } from "../entity";
 import { MetaBuilding } from "../meta_building";
 import { GameRoot } from "../root";
-import { enumHubGoalRewards } from "../tutorial_goals";
 
 export class MetaMixerBuilding extends MetaBuilding {
     constructor() {
@@ -20,13 +19,6 @@ export class MetaMixerBuilding extends MetaBuilding {
 
     getSilhouetteColor() {
         return "#cdbb7d";
-    }
-
-    /**
-     * @param {GameRoot} root
-     */
-    getIsUnlocked(root) {
-        return root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_mixer);
     }
 
     /**
