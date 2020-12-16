@@ -152,11 +152,10 @@ export class HubGoals extends BasicSerializableObject {
      * @param {enumHubGoalRewards} reward
      */
     isRewardUnlocked(reward) {
-        // if (G_IS_DEV && globalConfig.debug.allBuildingsUnlocked) {
-        //     return true;
-        // }
-        // return !!this.gainedRewards[reward];
-        return true;
+        if (G_IS_DEV && globalConfig.debug.allBuildingsUnlocked) {
+            return true;
+        }
+        return !!this.gainedRewards[reward];
     }
 
     /**
@@ -198,15 +197,6 @@ export class HubGoals extends BasicSerializableObject {
             };
             return;
         }
-
-        //Floor Required amount to remove confusion
-        const required = Math.min(200, Math.floor(4 + (this.level - 27) * 0.25));
-        this.currentGoal = {
-            definition: this.computeFreeplayShape(this.level),
-            required,
-            reward: enumHubGoalRewards.no_reward_freeplay,
-            throughputOnly: true,
-        };
     }
 
     /**

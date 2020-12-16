@@ -7,7 +7,6 @@ import {
     KEYCODE_RMB,
     KEYMAPPINGS,
 } from "../../key_action_mapper";
-import { enumHubGoalRewards } from "../../tutorial_goals";
 import { BaseHUDPart } from "../base_hud_part";
 import { DynamicDomAttach } from "../dynamic_dom_attach";
 
@@ -258,8 +257,7 @@ export class HUDKeybindingOverlay extends BaseHUDPart {
                 // Switch layers
                 label: T.ingame.keybindingsOverlay.switchLayers,
                 keys: [k.ingame.switchLayers],
-                condition: () =>
-                    this.root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_wires_painter_and_levers),
+                condition: () => true,
             },
         ];
 
