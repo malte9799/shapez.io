@@ -19,9 +19,9 @@ export class MetaHubBuilding extends MetaBuilding {
         return "#eb5555";
     }
 
-    getIsRotateable() {
-        return false;
-    }
+    // getIsRotateable() {
+    //     return false;
+    // }
 
     getBlueprintSprite() {
         return null;
