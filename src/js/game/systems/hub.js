@@ -29,17 +29,7 @@ export class HubSystem extends GameSystemWithFilter {
             this.drawEntity(parameters, this.allEntities[i]);
         }
     }
-
-    update() {
-        for (let i = 0; i < this.allEntities.length; ++i) {
-            // Set hub goal
-            const entity = this.allEntities[i];
-            const pinsComp = entity.components.WiredPins;
-            pinsComp.slots[0].value = this.root.shapeDefinitionMgr.getShapeItemFromDefinition(
-                this.root.hubGoals.currentGoal.definition
-            );
-        }
-    }
+    
     /**
      *
      * @param {HTMLCanvasElement} canvas
