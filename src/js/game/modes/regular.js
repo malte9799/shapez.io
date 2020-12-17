@@ -17,7 +17,7 @@ export function generateLevelDefinitions(limitedVersion = false) {
     const levelDefinitions = [
         // Level 1
         {
-            shape: "RuRuRuRu:RuRuRuRu:RuRuRuRu:RuRuRuRu",
+            shape: "RuRu----:RuRu----:RuRuRuRu:RuRuRuRu",
             required: 10,
             reward: enumHubGoalRewards.level_1,
         },
@@ -74,15 +74,15 @@ export function generateLevelDefinitions(limitedVersion = false) {
 
         // Level 9
         {
-            shape: "CpCpCpCp",
-            required: 600,
+            shape: "WwWwWwWw:WbWrWyWg",
+            required: 10,
             reward: enumHubGoalRewards.level_9,
         },
 
         // Level 10
         {
-            shape: "ScScScSc",
-            required: 800,
+            shape: "--Sw--Sw:--Sr--Sr:--Sw--Sw:RuSrRuSr",
+            required: 10,
             reward: enumHubGoalRewards.level_10,
         },
 

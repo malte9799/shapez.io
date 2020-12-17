@@ -7,6 +7,8 @@ import { Level_5 } from "./levels/level_5";
 import { Level_6 } from "./levels/level_6";
 import { Level_7 } from "./levels/level_7";
 import { Level_8 } from "./levels/level_8";
+import { Level_9 } from "./levels/level_9";
+import { Level_10 } from "./levels/level_10";
 
 export function initLevelRegistry() {
     gLevelRegistry.register(Level_1);
@@ -17,6 +19,8 @@ export function initLevelRegistry() {
     gLevelRegistry.register(Level_6);
     gLevelRegistry.register(Level_7);
     gLevelRegistry.register(Level_8);
+    gLevelRegistry.register(Level_9);
+    gLevelRegistry.register(Level_10);
 
     // IMPORTANT ^^^^^ UPDATE ENTITY COMPONENT STORAGE AFTERWARDS
 
@@ -26,7 +30,7 @@ export function initLevelRegistry() {
         // @ts-ignore
         require.context("./levels", false, /.*\.js/i).keys().length ===
             gLevelRegistry.getNumEntries(),
-        "Not all components are registered"
+        "Not all Levels are registered"
     );
 
     console.log("📦 There are", gLevelRegistry.getNumEntries(), "levels");
