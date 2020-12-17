@@ -504,6 +504,11 @@ buildings:
         levelShortcut: LVL
         endOfDemo: End of Demo
 
+    wall:
+        default:
+            name: Wall
+            description: The Border of every Level.
+
     belt:
         default:
             name: &belt Conveyor Belt
