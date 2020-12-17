@@ -29,7 +29,7 @@ export class HubSystem extends GameSystemWithFilter {
             this.drawEntity(parameters, this.allEntities[i]);
         }
     }
-    
+
     /**
      *
      * @param {HTMLCanvasElement} canvas
@@ -52,8 +52,6 @@ export class HubSystem extends GameSystemWithFilter {
         });
 
         context.clearRect(0, 0, w, h);
-
-        this.hubSprite.draw(context, 0, 0, w, h);
 
         if (this.root.hubGoals.isEndOfDemoReached()) {
             // End of demo
