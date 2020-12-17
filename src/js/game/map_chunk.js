@@ -83,18 +83,6 @@ export class MapChunk {
          */
         this.patches = [];
 
-        this.generateLowerLayer();
-    }
-
-    /**
-     * Generates the lower layer "terrain"
-     */
-    generateLowerLayer() {
-      if (this.x == 0 && this.y == 0) { // level 1
-        let subShapes = [enumSubShape.rect, enumSubShape.circle, enumSubShape.circle, enumSubShape.circle]
-        const definition = this.root.shapeDefinitionMgr.getDefinitionFromSimpleShapes(subShapes);
-        this.lowerLayer[5][5] = this.root.shapeDefinitionMgr.getShapeItemFromDefinition(definition)
-      }
     }
 
 

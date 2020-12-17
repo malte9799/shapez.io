@@ -41,7 +41,6 @@ export class MapChunkView extends MapChunk {
      */
     drawBackgroundLayer(parameters) {
         const systems = this.root.systemMgr.systems;
-        systems.mapResources.drawChunk(parameters, this);
         systems.beltUnderlays.drawChunk(parameters, this);
         systems.belt.drawChunk(parameters, this);
     }
@@ -70,6 +69,7 @@ export class MapChunkView extends MapChunk {
         systems.display.drawChunk(parameters, this);
         systems.storage.drawChunk(parameters, this);
         systems.itemProcessorOverlays.drawChunk(parameters, this);
+        systems.itemProducer.drawChunk(parameters, this);
     }
 
     /**
@@ -160,17 +160,6 @@ export class MapChunkView extends MapChunk {
                     );
 
                     if (overlayMatrix) {
-                        // Draw lower content first since it "shines" through
-                        const lowerContent = lowerArray[y];
-                        if (lowerContent) {
-                            context.fillStyle = lowerContent.getBackgroundColorAsResource();
-                            context.fillRect(
-                                x * CHUNK_OVERLAY_RES,
-                                y * CHUNK_OVERLAY_RES,
-                                CHUNK_OVERLAY_RES,
-                                CHUNK_OVERLAY_RES
-                            );
-                        }
 
                         context.fillStyle = metaBuilding.getSilhouetteColor(
                             data.variant,
