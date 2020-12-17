@@ -41,10 +41,26 @@ export class Level {
         return this.id;
     }
 
+    getOrigin() {
+        const originChunk = new Vector((this.lvlNum % 5) * 2, Math.floor(this.lvlNum/5) * 2);
+        const dimensions = this.getDimensions();
+        const x = originChunk.x * globalConfig.mapChunkSize + globalConfig.mapChunkSize - Math.round(dimensions.x / 2)
+        const y = originChunk.y * globalConfig.mapChunkSize + globalConfig.mapChunkSize - Math.round(dimensions.y / 2)
+        return new Vector(x, y)
+    }
+
+    isLvlTiles(tile) {
+        const lvlOrigin = this.getOrigin()
+        const dimensions = this.getDimensions();
+
+        if (tile.x < lvlOrigin.x + 1 || tile.y < lvlOrigin.y + 1 || tile.x > lvlOrigin.x + dimensions.x - 2 || tile.y > lvlOrigin.y + dimensions.y - 2) return false
+        return true
+    }
+
     /**
      * Should return the dimensions of the Level
      */
-    getDimensions(variant = defaultBuildingVariant) {
+    getDimensions() {
         return new Vector(1, 1);
     }
 
@@ -63,17 +79,14 @@ export class Level {
      * @param {GameRoot} param0.root
      */
     createLevel(root) {
-        const originChunk = new Vector((this.lvlNum % 5) * 2, Math.floor(this.lvlNum/5) * 2);
-        const dimensions = this.getDimensions();
-        this.x = originChunk.x * globalConfig.mapChunkSize + globalConfig.mapChunkSize - Math.round(dimensions.x / 2)
-        this.y = originChunk.y * globalConfig.mapChunkSize + globalConfig.mapChunkSize - Math.round(dimensions.y / 2)
+        const origin = this.getOrigin()
 
         const lvlBuildings = this.setupLevel(root)
         for (let i in lvlBuildings) {
             const param = lvlBuildings[i]
             let entity = gMetaBuildingRegistry.findById(param[0]).createEntity({
                 root: this.root,
-                origin: new Vector(this.x + param[1].x, this.y + param[1].y),
+                origin: new Vector(origin.x + param[1].x, origin.y + param[1].y),
                 rotation: rotation[param[2]],
                 originalRotation: param[3],
                 rotationVariant: param[4],
@@ -82,21 +95,21 @@ export class Level {
             if (param.length >= 7 && param[0] == "item_producer") {
                 entity.components.ItemProducer.item = this.parseSignalCode(root, param[6]);
             }
-            root.map.   placeStaticEntity(entity);
+            root.map.placeStaticEntity(entity);
             root.entityMgr.registerEntity(entity);
         };
 
-        // console.log(root.map.getTileContent(tile, "regular"));
-
+        const dimensions = this.getDimensions();
         for (var x = 0; x <= dimensions.x - 1; x++) {
             for (var y = 0; y <= dimensions.y - 1; y++) {
                 if (y != 0 && y != dimensions.y - 1 && x != 0 && x != dimensions.x - 1) {
                     continue;
                 }
-                if (!root.map.getTileContent(new Vector(x + this.x, y + this.y), "regular")) {
+                const tile = new Vector(x + origin.x, y + origin.y)
+                if (!root.map.getTileContent(tile, "regular")) {
                     let entity = gMetaBuildingRegistry.findById("wall").createEntity({
                         root: this.root,
-                        origin: new Vector(x + this.x, y + this.y),
+                        origin: tile,
                         rotation: 0,
                         originalRotation: 0,
                         rotationVariant: 0,

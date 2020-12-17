@@ -1,5 +1,5 @@
 import { globalConfig } from "../../../core/config";
-import { gMetaBuildingRegistry } from "../../../core/global_registries";
+import { gMetaBuildingRegistry, gLevelRegistry } from "../../../core/global_registries";
 import { Signal, STOP_PROPAGATION } from "../../../core/signal";
 import { TrackedState } from "../../../core/tracked_state";
 import { Vector } from "../../../core/vector";
@@ -14,6 +14,8 @@ import { MetaMinerBuilding, enumMinerVariants } from "../../buildings/miner";
 import { enumHubGoalRewards } from "../../tutorial_goals";
 import { getBuildingDataFromCode, getCodeFromBuildingData } from "../../building_codes";
 import { MetaHubBuilding } from "../../buildings/hub";
+import { MetaWallBuilding } from "../../buildings/wall";
+import { MetaItemProducerBuilding } from "../../buildings/item_producer";
 
 /**
  * Contains all logic for the building placer - this doesn't include the rendering
@@ -339,11 +341,7 @@ export class HUDBuildingPlacerLogic extends BaseHUDPart {
                 this.root.currentLayer === "regular"
             ) {
                 this.currentMetaBuilding.set(gMetaBuildingRegistry.findByClass(MetaMinerBuilding));
-
-                // Select chained miner if available, since that's always desired once unlocked
-                if (this.root.hubGoals.isRewardUnlocked(enumHubGoalRewards.reward_miner_chainable)) {
-                    this.currentVariant.set(enumMinerVariants.chainable);
-                }
+                this.currentVariant.set(enumMinerVariants.chainable);
             } else {
                 this.currentMetaBuilding.set(null);
             }
@@ -354,8 +352,11 @@ export class HUDBuildingPlacerLogic extends BaseHUDPart {
         const buildingCode = contents.components.StaticMapEntity.code;
         const extracted = getBuildingDataFromCode(buildingCode);
 
-        // Disable pipetting the hub
-        if (extracted.metaInstance.getId() === gMetaBuildingRegistry.findByClass(MetaHubBuilding).getId()) {
+        // Disable pipetting the hub / Wall / ItemProducer
+        if (extracted.metaInstance.getId() === gMetaBuildingRegistry.findByClass(MetaHubBuilding).getId() ||
+            extracted.metaInstance.getId() === gMetaBuildingRegistry.findByClass(MetaWallBuilding).getId() ||
+            extracted.metaInstance.getId() === gMetaBuildingRegistry.findByClass(MetaItemProducerBuilding).getId()) {
+
             this.currentMetaBuilding.set(null);
             return;
         }
@@ -396,6 +397,20 @@ export class HUDBuildingPlacerLogic extends BaseHUDPart {
     }
 
     /**
+     * Test if tile is inside a Level
+     * @param {Vector} tile
+     */
+    tileInLevel(tile) {
+        for (var i = 0; i < gLevelRegistry.entries.length; i++) {
+            let level = gLevelRegistry.entries[i];
+            if (level.isLvlTiles(tile)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Tries to place the current building at the given tile
      * @param {Vector} tile
      */
@@ -404,6 +419,8 @@ export class HUDBuildingPlacerLogic extends BaseHUDPart {
             // Dont allow placing in overview mode
             return;
         }
+
+        if (!this.tileInLevel(tile)) return;
 
         const metaBuilding = this.currentMetaBuilding.get();
         const { rotation, rotationVariant } = metaBuilding.computeOptimalDirectionAndRotationVariantAtTile({
