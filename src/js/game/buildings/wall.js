@@ -4,7 +4,7 @@ import { WallComponent } from "../components/wall";
 import { Entity } from "../entity";
 import { MetaBuilding } from "../meta_building";
 
-const overlayMatrix = generateMatrixRotations([1, 1, 1, 1, 0, 1, 1, 1, 1]);
+const overlayMatrix = generateMatrixRotations([1, 1, 1, 1, 1, 1, 1, 1, 1]);
 
 export class MetaWallBuilding extends MetaBuilding {
     constructor() {
@@ -20,7 +20,7 @@ export class MetaWallBuilding extends MetaBuilding {
     }
 
     getSilhouetteColor() {
-        return "#333";
+        return "#444";
     }
 
     getDimensions() {
