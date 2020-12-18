@@ -16,6 +16,7 @@ import { getBuildingDataFromCode, getCodeFromBuildingData } from "../../building
 import { MetaHubBuilding } from "../../buildings/hub";
 import { MetaWallBuilding } from "../../buildings/wall";
 import { MetaItemProducerBuilding } from "../../buildings/item_producer";
+import { queryParamOptions } from "../../../core/query_parameters";
 
 /**
  * Contains all logic for the building placer - this doesn't include the rendering
@@ -332,19 +333,6 @@ export class HUDBuildingPlacerLogic extends BaseHUDPart {
 
         const contents = this.root.map.getTileContent(tile, this.root.currentLayer);
         if (!contents) {
-            const tileBelow = this.root.map.getLowerLayerContentXY(tile.x, tile.y);
-
-            // Check if there's a shape or color item below, if so select the miner
-            if (
-                tileBelow &&
-                this.root.app.settings.getAllSettings().pickMinerOnPatch &&
-                this.root.currentLayer === "regular"
-            ) {
-                this.currentMetaBuilding.set(gMetaBuildingRegistry.findByClass(MetaMinerBuilding));
-                this.currentVariant.set(enumMinerVariants.chainable);
-            } else {
-                this.currentMetaBuilding.set(null);
-            }
             return;
         }
 
@@ -420,7 +408,7 @@ export class HUDBuildingPlacerLogic extends BaseHUDPart {
             return;
         }
 
-        if (!this.tileInLevel(tile)) return;
+        if (!queryParamOptions.test && !this.tileInLevel(tile)) return;
 
         const metaBuilding = this.currentMetaBuilding.get();
         const { rotation, rotationVariant } = metaBuilding.computeOptimalDirectionAndRotationVariantAtTile({

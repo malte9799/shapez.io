@@ -102,23 +102,6 @@ export class MapChunkView extends MapChunk {
             originalW: overlaySize,
             originalH: overlaySize,
         });
-
-        parameters.context.imageSmoothingEnabled = true;
-        const resourcesScale = this.root.app.settings.getAllSettings().mapResourcesScale;
-
-        // Draw patch items
-        if (this.root.currentLayer === "regular" && resourcesScale > 0.05) {
-            const diameter = (70 / Math.pow(parameters.zoomLevel, 0.35)) * (0.2 + 2 * resourcesScale);
-
-            for (let i = 0; i < this.patches.length; ++i) {
-                const patch = this.patches[i];
-                if (patch.item.getItemType() === "shape") {
-                    const destX = this.x * dims + patch.pos.x * globalConfig.tileSize;
-                    const destY = this.y * dims + patch.pos.y * globalConfig.tileSize;
-                    patch.item.drawItemCenteredClipped(destX, destY, parameters, diameter);
-                }
-            }
-        }
     }
 
     /**
@@ -143,7 +126,6 @@ export class MapChunkView extends MapChunk {
         }
 
         for (let x = 0; x < globalConfig.mapChunkSize; ++x) {
-            const lowerArray = this.lowerLayer[x];
             const upperArray = this.contents[x];
             for (let y = 0; y < globalConfig.mapChunkSize; ++y) {
                 const upperContent = upperArray[y];
@@ -195,20 +177,9 @@ export class MapChunkView extends MapChunk {
                         continue;
                     }
                 }
-
-                const lowerContent = lowerArray[y];
-                if (lowerContent) {
-                    context.fillStyle = lowerContent.getBackgroundColorAsResource();
-                    context.fillRect(
-                        x * CHUNK_OVERLAY_RES,
-                        y * CHUNK_OVERLAY_RES,
-                        CHUNK_OVERLAY_RES,
-                        CHUNK_OVERLAY_RES
-                    );
-                }
             }
         }
-
+        
         if (this.root.currentLayer === "wires") {
             // Draw wires overlay
 

@@ -69,12 +69,6 @@ export class HUDColorBlindHelper extends BaseHUDPart {
                     }
                 }
             }
-        } else {
-            // We hovered a lower layer, show the color there
-            const lowerLayer = this.root.map.getLowerLayerContentXY(tile.x, tile.y);
-            if (lowerLayer && lowerLayer.getItemType() === "color") {
-                return /** @type {ColorItem} */ (lowerLayer).color;
-            }
         }
 
         return null;
