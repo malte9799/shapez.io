@@ -1,10 +1,7 @@
-import { generateMatrixRotations } from "../../core/utils";
 import { enumDirection, Vector } from "../../core/vector";
 import { WallComponent } from "../components/wall";
 import { Entity } from "../entity";
 import { MetaBuilding } from "../meta_building";
-
-const overlayMatrix = generateMatrixRotations([1, 1, 1, 1, 1, 1, 1, 1, 1]);
 
 export class MetaWallBuilding extends MetaBuilding {
     constructor() {
@@ -25,10 +22,6 @@ export class MetaWallBuilding extends MetaBuilding {
 
     getDimensions() {
         return new Vector(1, 1);
-    }
-
-    getSpecialOverlayRenderMatrix(rotation) {
-        return overlayMatrix[rotation];
     }
 
     /**
