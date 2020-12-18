@@ -20,3 +20,8 @@ if (options.fullVersion && !G_IS_RELEASE) {
 if (options.sandboxMode && !G_IS_RELEASE) {
     queryParamOptions.sandboxMode = true;
 }
+
+// Allow testing full version outside of standalone
+if (options.test && !G_IS_RELEASE) {
+    queryParamOptions.test = true;
+}

@@ -29,14 +29,11 @@ export default {
     // All rewards can be unlocked by passing just 1 of any shape
     // rewardsInstant: true,
     // -----------------------------------------------------------------------------------
-    // Unlocks all buildings
-    // allBuildingsUnlocked: true,
+    // Unlocks all levels
+    // allLevelsUnlocked: true,
     // -----------------------------------------------------------------------------------
     // Disables cost of blueprints
     // blueprintsNoCost: true,
-    // -----------------------------------------------------------------------------------
-    // Disables cost of upgrades
-    // upgradesNoCost: true,
     // -----------------------------------------------------------------------------------
     // Disables the dialog when completing a level
     // disableUnlockDialog: true,
