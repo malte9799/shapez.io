@@ -44,9 +44,15 @@ export class Level {
     getOrigin() {
         const originChunk = new Vector((this.lvlNum % 5) * 2, Math.floor(this.lvlNum/5) * 2);
         const dimensions = this.getDimensions();
-        const x = originChunk.x * globalConfig.mapChunkSize + globalConfig.mapChunkSize - Math.round(dimensions.x / 2)
-        const y = originChunk.y * globalConfig.mapChunkSize + globalConfig.mapChunkSize - Math.round(dimensions.y / 2)
-        return new Vector(x, y)
+        const x = originChunk.x * globalConfig.mapChunkSize + globalConfig.mapChunkSize - Math.round(dimensions.x / 2);
+        const y = originChunk.y * globalConfig.mapChunkSize + globalConfig.mapChunkSize - Math.round(dimensions.y / 2);
+        return new Vector(x, y);
+    }
+
+    getCenter() {
+        const originChunk = new Vector((this.lvlNum % 5) * 2, Math.floor(this.lvlNum/5) * 2);
+        const dimensions = this.getDimensions();
+        return new Vector(originChunk.x * globalConfig.mapChunkSize, originChunk.y * globalConfig.mapChunkSize);
     }
 
     isLvlTiles(tile) {
@@ -81,6 +87,7 @@ export class Level {
     createLevel(root) {
         const origin = this.getOrigin()
 
+        // place special buildings
         const lvlBuildings = this.setupLevel(root)
         for (let i in lvlBuildings) {
             const param = lvlBuildings[i]
@@ -99,6 +106,7 @@ export class Level {
             root.entityMgr.registerEntity(entity);
         };
 
+        // place walls
         const dimensions = this.getDimensions();
         for (var x = 0; x <= dimensions.x - 1; x++) {
             for (var y = 0; y <= dimensions.y - 1; y++) {

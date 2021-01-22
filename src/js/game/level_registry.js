@@ -22,8 +22,6 @@ export function initLevelRegistry() {
     gLevelRegistry.register(Level_9);
     gLevelRegistry.register(Level_10);
 
-    // IMPORTANT ^^^^^ UPDATE ENTITY COMPONENT STORAGE AFTERWARDS
-
     // Sanity check - If this is thrown, you (=me, lol) forgot to add a new component here
 
     assert(
