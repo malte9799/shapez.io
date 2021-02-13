@@ -63,8 +63,7 @@ console.log(
 
 console.log("Environment: %c" + G_APP_ENVIRONMENT, "color: #fff");
 
-// if (G_IS_DEV && IS_DEBUG) {
-if (true) {
+if (G_IS_DEV && IS_DEBUG) {
     console.log("\n%c🛑 DEBUG ENVIRONMENT 🛑\n", "color: #f77");
 }
 

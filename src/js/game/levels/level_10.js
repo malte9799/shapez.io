@@ -1,7 +1,5 @@
-import { enumDirection, Vector } from "../../core/vector";
+import { Vector } from "../../core/vector";
 import { Level } from "../level";
-import { MetaHubBuilding } from "../buildings/hub";
-import { MetaItemProducerBuilding } from "../buildings/item_producer";
 
 export class Level_10 extends Level {
     constructor() {
@@ -23,6 +21,6 @@ export class Level_10 extends Level {
             ["item_producer", new Vector(4, 0), "bottom", 0, 0, "default", "white"],
             ["item_producer", new Vector(4, 6), "top", 0, 0, "default", "white"],
             ["wall", new Vector(2, 3), "top", 0, 0, "default", "white"],
-        ]
+        ];
     }
 }
