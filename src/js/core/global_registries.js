@@ -6,7 +6,7 @@ import { Factory } from "./factory";
  * @typedef {import("../game/component").Component} Component
  * @typedef {import("../game/base_item").BaseItem} BaseItem
  * @typedef {import("../game/meta_building").MetaBuilding} MetaBuilding
- * @typedef {import("../game/level").MetaBuilding} Level
+ * @typedef {import("../game/level").Level} Level
 
 
 // These factories are here to remove circular dependencies
@@ -26,7 +26,7 @@ export let gGameSpeedRegistry = new Factory("gamespeed");
 /** @type {FactoryTemplate<BaseItem>} */
 export let gItemRegistry = new Factory("item");
 
-/** @type {FactoryTemplate<Level>} */
+/** @type {SingletonFactoryTemplate<Level>} */
 export let gLevelRegistry = new SingletonFactory();
 
 // Helpers

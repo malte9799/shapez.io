@@ -33,7 +33,6 @@ export class HUDSandboxController extends BaseHUDPart {
         bind(".giveBlueprints", this.giveBlueprints);
         bind(".levelToggle .minus", () => this.modifyLevel(-1));
         bind(".levelToggle .plus", () => this.modifyLevel(1));
-
     }
 
     giveBlueprints() {
@@ -64,9 +63,7 @@ export class HUDSandboxController extends BaseHUDPart {
             }
         }
 
-        this.root.hud.signals.notification.dispatch(
-            "Changed level to " + hubGoals.level
-        );
+        this.root.hud.signals.notification.dispatch("Changed level to " + hubGoals.level);
     }
 
     initialize() {
