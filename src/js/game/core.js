@@ -183,11 +183,12 @@ export class GameCore {
             return false;
         }
         this.root.gameIsFresh = false;
-        if (this.root.hubGoals.level - 1 > gLevelRegistry.entries.length) {
+        if (this.root.hubGoals.level > gLevelRegistry.entries.length) {
             this.root.signals.openLevelSelector.dispatch();
         } else {
             this.root.signals.loadLevel.dispatch(this.root.hubGoals.level - 1);
         }
+
         return true;
     }
 
