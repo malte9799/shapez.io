@@ -37,13 +37,21 @@ export class HUDUnlockNotification extends BaseHUDPart {
         this.elemSubTitle = makeDiv(dialog, null, ["subTitle"], T.ingame.levelCompleteNotification.completed);
 
         this.elemContents = makeDiv(dialog, null, ["contents"]);
+        const buttonContents = makeDiv(dialog, null, ["buttons"]);
 
-        this.btnClose = document.createElement("button");
-        this.btnClose.classList.add("close", "styledButton");
-        this.btnClose.innerText = T.ingame.levelCompleteNotification.buttonNextLevel;
-        dialog.appendChild(this.btnClose);
+        // Go to Level Select
+        this.btnLevels = document.createElement("button");
+        this.btnLevels.classList.add("levels", "styledButton");
+        this.btnLevels.innerText = T.ingame.levelCompleteNotification.buttonLevelSelect;
+        buttonContents.appendChild(this.btnLevels);
+        this.trackClicks(this.btnLevels, this.requestLevelSelector);
 
-        this.trackClicks(this.btnClose, this.requestClose);
+        // Go to next Level
+        this.btnNextLevel = document.createElement("button");
+        this.btnNextLevel.classList.add("nextLevel", "styledButton");
+        this.btnNextLevel.innerText = T.ingame.levelCompleteNotification.buttonNextLevel;
+        buttonContents.appendChild(this.btnNextLevel);
+        this.trackClicks(this.btnNextLevel, this.requestNextLevel);
     }
 
     /**
@@ -101,15 +109,15 @@ export class HUDUnlockNotification extends BaseHUDPart {
             clearTimeout(this.buttonShowTimeout);
         }
 
-        this.element.querySelector("button.close").classList.remove("unlocked");
+        this.element.querySelector("button.nextLevel").classList.remove("unlocked");
 
         if (this.root.app.settings.getAllSettings().offerHints) {
             this.buttonShowTimeout = setTimeout(
-                () => this.element.querySelector("button.close").classList.add("unlocked"),
+                () => this.element.querySelector("button.nextLevel").classList.add("unlocked"),
                 G_IS_DEV ? 100 : 5000
             );
         } else {
-            this.element.querySelector("button.close").classList.add("unlocked");
+            this.element.querySelector("button.nextLevel").classList.add("unlocked");
         }
     }
 
@@ -130,19 +138,6 @@ export class HUDUnlockNotification extends BaseHUDPart {
             this.close();
 
             this.root.hud.signals.unlockNotificationFinished.dispatch();
-
-            if (!this.root.app.settings.getAllSettings().offerHints) {
-                return;
-            }
-
-            if (this.root.hubGoals.level === 5) {
-                const { showKeybindings } = this.root.hud.parts.dialogs.showInfo(
-                    T.dialogs.keybindingsIntroduction.title,
-                    T.dialogs.keybindingsIntroduction.desc,
-                    ["showKeybindings:misc", "ok:good:timeout"]
-                );
-                showKeybindings.add(() => this.root.gameState.goToKeybindings());
-            }
         });
     }
 
@@ -153,6 +148,16 @@ export class HUDUnlockNotification extends BaseHUDPart {
             this.buttonShowTimeout = null;
         }
         this.visible = false;
+    }
+
+    requestNextLevel() {
+        this.requestClose();
+        this.root.signals.loadLevel.dispatch(this.root.hubGoals.level - 1);
+    }
+
+    requestLevelSelector() {
+        this.requestClose();
+        this.root.signals.openLevelSelector.dispatch();
     }
 
     update() {

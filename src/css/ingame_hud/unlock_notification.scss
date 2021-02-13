@@ -137,41 +137,12 @@
             }
         }
 
-        button.close {
-            border: 0;
-            position: relative;
-            @include S(margin-top, 30px);
-
-            &:not(.unlocked) {
-                pointer-events: none;
-                opacity: 0.8;
-                cursor: default;
-            }
-
-            &.unlocked {
-                &::after {
-                    animation: none !important;
-                }
-            }
-
-            &::after {
-                content: " ";
+        .buttons {
+            position: absolute;
+            top: 50%;
+            button {
+                @include S(margin, 10px);
                 display: inline-block;
-                position: absolute;
-                top: 0;
-                left: 100%;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 10, 20, 0.8);
-
-                @include InlineAnimation(5s linear) {
-                    0% {
-                        left: 0;
-                    }
-                    100% {
-                        left: 100%;
-                    }
-                }
             }
         }
     }
