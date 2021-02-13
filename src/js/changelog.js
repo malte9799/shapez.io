@@ -1,5 +1,19 @@
 export const CHANGELOG = [
     {
+        version: "Puzzlemode: 0.1.0",
+        date: "13.02.2021",
+        entries: [
+            "First Bigger Update of the Puzzlemode!!",
+            "Added a Level Selector for Easily entering Levels",
+            "Removed the Ability to move the Camera so it's always focused on the Level",
+        ],
+    },
+    {
+        version: "Puzzlemode: 0.0.1",
+        date: "16.12.2020",
+        entries: ["First Beta of The Puzzlemod"],
+    },
+    {
         version: "1.2.2",
         date: "07.12.2020",
         entries: [
