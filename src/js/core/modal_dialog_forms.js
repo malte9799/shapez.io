@@ -184,8 +184,6 @@ export class FormElementItemChooser extends FormElement {
     }
 
     getHtml() {
-        let classes = [];
-
         return `
             <div class="formElement">
                 ${this.label ? `<label>${this.label}</label>` : ""}
