@@ -1,5 +1,6 @@
 import { clickDetectorGlobals } from "../core/click_detector";
 import { globalConfig, SUPPORT_TOUCH } from "../core/config";
+import { gLevelRegistry } from "../core/global_registries";
 import { createLogger } from "../core/logging";
 import { Rectangle } from "../core/rectangle";
 import { Signal, STOP_PROPAGATION } from "../core/signal";
@@ -48,7 +49,6 @@ export class Camera extends BasicSerializableObject {
         this.center = new Vector(0, 0);
 
         // Input handling
-        this.currentlyMoving = false;
         this.lastMovingPosition = null;
         this.lastMovingPositionLastTick = null;
         this.numTicksStandingStill = null;
@@ -95,7 +95,7 @@ export class Camera extends BasicSerializableObject {
         if (G_IS_DEV) {
             window.addEventListener("keydown", ev => {
                 if (ev.key === "i") {
-                    this.zoomLevel = 3;
+                    this.zoomLevel = 1;
                 }
             });
         }
@@ -138,7 +138,6 @@ export class Camera extends BasicSerializableObject {
      */
     setDesiredCenter(center) {
         this.desiredCenter = center.copy();
-        this.currentlyMoving = false;
     }
 
     /**
@@ -192,7 +191,6 @@ export class Camera extends BasicSerializableObject {
         this.currentPan.x = 0;
         this.currentPan.y = 0;
         this.currentlyPinching = false;
-        this.currentlyMoving = false;
         this.lastMovingPosition = null;
         this.didMoveSinceTouchStart = false;
         this.desiredZoom = null;
@@ -205,10 +203,6 @@ export class Camera extends BasicSerializableObject {
     isCurrentlyInteracting() {
         if (this.currentlyPinching) {
             return true;
-        }
-        if (this.currentlyMoving) {
-            // Only interacting if moved at least once
-            return this.didMoveSinceTouchStart;
         }
         if (this.touchPostMoveVelocity.lengthSquare() > 1) {
             return true;
@@ -230,7 +224,6 @@ export class Camera extends BasicSerializableObject {
     cancelAllInteractions() {
         this.touchPostMoveVelocity = new Vector(0, 0);
         this.desiredCenter = null;
-        this.currentlyMoving = false;
         this.currentlyPinching = false;
         this.desiredZoom = null;
     }
@@ -397,7 +390,7 @@ export class Camera extends BasicSerializableObject {
      * @returns {boolean}
      */
     canZoomIn() {
-        const maxLevel = this.root.app.platformWrapper.getMaximumZoom();
+        const maxLevel = globalConfig.maxZoomLevel;
         return this.zoomLevel <= maxLevel - 0.01;
     }
 
@@ -406,7 +399,7 @@ export class Camera extends BasicSerializableObject {
      * @returns {boolean}
      */
     canZoomOut() {
-        const minLevel = this.root.app.platformWrapper.getMinimumZoom();
+        const minLevel = globalConfig.minZoomLevel;
         return this.zoomLevel >= minLevel + 0.01;
     }
 
@@ -500,7 +493,6 @@ export class Camera extends BasicSerializableObject {
             event.preventDefault();
             // event.stopPropagation();
         }
-        const prevZoom = this.zoomLevel;
 
         const scale = 1 + 0.15 * this.root.app.settings.getScrollWheelSensitivity();
         assert(Number.isFinite(scale), "Got invalid scale in mouse wheel event: " + event.deltaY);
@@ -512,18 +504,14 @@ export class Camera extends BasicSerializableObject {
         this.desiredZoom = null;
 
         let mousePosition = this.root.app.mousePosition;
-        if (!this.root.app.settings.getAllSettings().zoomToCursor) {
-            mousePosition = new Vector(this.root.gameWidth / 2, this.root.gameHeight / 2);
-        }
 
         if (mousePosition) {
+            mousePosition = new Vector(this.root.gameWidth / 2, this.root.gameHeight / 2);
             const worldPos = this.root.camera.screenToWorld(mousePosition);
             const worldDelta = worldPos.sub(this.center);
-            const actualDelta = this.zoomLevel / prevZoom - 1;
-            this.center = this.center.add(worldDelta.multiplyScalar(actualDelta));
+            this.center = this.center.add(worldDelta);
             this.desiredCenter = null;
         }
-
         return false;
     }
 
@@ -551,7 +539,6 @@ export class Camera extends BasicSerializableObject {
 
             const touch1 = event.touches[0];
             const touch2 = event.touches[1];
-            this.currentlyMoving = false;
             this.currentlyPinching = true;
             this.lastPinchPositions = [
                 new Vector(touch1.clientX, touch1.clientY),
@@ -573,10 +560,7 @@ export class Camera extends BasicSerializableObject {
 
         clickDetectorGlobals.lastTouchTime = performance.now();
 
-        if (event.touches.length === 1) {
-            const touch = event.touches[0];
-            this.combinedSingleTouchMoveHandler(touch.clientX, touch.clientY);
-        } else if (event.touches.length === 2) {
+        if (event.touches.length === 2) {
             if (this.currentlyPinching) {
                 const touch1 = event.touches[0];
                 const touch2 = event.touches[1];
@@ -674,7 +658,6 @@ export class Camera extends BasicSerializableObject {
         }
 
         this.touchPostMoveVelocity = new Vector(0, 0);
-        this.currentlyMoving = true;
         this.lastMovingPosition = pos;
         this.lastMovingPositionLastTick = null;
         this.numTicksStandingStill = 0;
@@ -692,39 +675,13 @@ export class Camera extends BasicSerializableObject {
             // Somebody else captured it
             return;
         }
-
-        if (!this.currentlyMoving) {
-            return false;
-        }
-
-        let delta = this.lastMovingPosition.sub(pos).divideScalar(this.zoomLevel);
-        if (G_IS_DEV && globalConfig.debug.testCulling) {
-            // When testing culling, we see everything from the same distance
-            delta = delta.multiplyScalar(this.zoomLevel * -2);
-        }
-
-        this.didMoveSinceTouchStart = this.didMoveSinceTouchStart || delta.length() > 0;
-        this.center = this.center.add(delta);
-
-        this.touchPostMoveVelocity = this.touchPostMoveVelocity
-            .multiplyScalar(velocitySmoothing)
-            .add(delta.multiplyScalar(1 - velocitySmoothing));
-
-        this.lastMovingPosition = pos;
-        this.userInteraction.dispatch(USER_INTERACT_MOVE);
-
-        // Since we moved, abort any programmed moving
-        if (this.desiredCenter) {
-            this.desiredCenter = null;
-        }
     }
 
     /**
      * Internal touch stop handler
      */
     combinedSingleTouchStopHandler(x, y) {
-        if (this.currentlyMoving || this.currentlyPinching) {
-            this.currentlyMoving = false;
+        if (this.currentlyPinching) {
             this.currentlyPinching = false;
             this.lastMovingPosition = null;
             this.lastMovingPositionLastTick = null;
@@ -743,14 +700,13 @@ export class Camera extends BasicSerializableObject {
         if (G_IS_DEV && globalConfig.debug.disableZoomLimits) {
             return;
         }
-        const wrapper = this.root.app.platformWrapper;
 
         assert(Number.isFinite(this.zoomLevel), "Invalid zoom level *before* clamp: " + this.zoomLevel);
-        this.zoomLevel = clamp(this.zoomLevel, wrapper.getMinimumZoom(), wrapper.getMaximumZoom());
+        this.zoomLevel = clamp(this.zoomLevel, globalConfig.minZoomLevel, globalConfig.maxZoomLevel);
         assert(Number.isFinite(this.zoomLevel), "Invalid zoom level *after* clamp: " + this.zoomLevel);
 
         if (this.desiredZoom) {
-            this.desiredZoom = clamp(this.desiredZoom, wrapper.getMinimumZoom(), wrapper.getMaximumZoom());
+            this.desiredZoom = clamp(this.desiredZoom, globalConfig.minZoomLevel, globalConfig.maxZoomLevel);
         }
     }
 
@@ -773,11 +729,9 @@ export class Camera extends BasicSerializableObject {
             this.cameraUpdateTimeBucket -= physicsStepSizeMs;
 
             this.internalUpdatePanning(now, physicsStepSizeMs);
-            this.internalUpdateMousePanning(now, physicsStepSizeMs);
             this.internalUpdateZooming(now, physicsStepSizeMs);
             this.internalUpdateCentering(now, physicsStepSizeMs);
             this.internalUpdateShake(now, physicsStepSizeMs);
-            this.internalUpdateKeyboardForce(now, physicsStepSizeMs);
         }
         this.clampZoomLevel();
     }
@@ -827,25 +781,8 @@ export class Camera extends BasicSerializableObject {
 
         this.touchPostMoveVelocity = this.touchPostMoveVelocity.multiplyScalar(velocityFade);
 
-        // Check if the camera is being dragged but standing still: if not, zero out `touchPostMoveVelocity`.
-        if (this.currentlyMoving && this.desiredCenter === null) {
-            if (
-                this.lastMovingPositionLastTick !== null &&
-                this.lastMovingPositionLastTick.equalsEpsilon(this.lastMovingPosition)
-            ) {
-                this.numTicksStandingStill++;
-            } else {
-                this.numTicksStandingStill = 0;
-            }
-            this.lastMovingPositionLastTick = this.lastMovingPosition.copy();
-
-            if (this.numTicksStandingStill >= ticksBeforeErasingVelocity) {
-                this.touchPostMoveVelocity.x = 0;
-                this.touchPostMoveVelocity.y = 0;
-            }
-        }
         // Check influence of past points
-        if (!this.currentlyMoving && !this.currentlyPinching) {
+        if (!this.currentlyPinching) {
             const len = this.touchPostMoveVelocity.length();
             if (len >= velocityMax) {
                 this.touchPostMoveVelocity.x = (this.touchPostMoveVelocity.x * velocityMax) / len;
@@ -858,69 +795,6 @@ export class Camera extends BasicSerializableObject {
             this.currentPan = mixVector(this.currentPan, this.desiredPan, 0.06);
             this.center = this.center.add(this.currentPan.multiplyScalar((0.5 * dt) / this.zoomLevel));
         }
-    }
-
-    /**
-     * Internal screen panning handler
-     * @param {number} now
-     * @param {number} dt
-     */
-    internalUpdateMousePanning(now, dt) {
-        if (!this.root.app.focused) {
-            return;
-        }
-
-        if (!this.root.app.settings.getAllSettings().enableMousePan) {
-            // Not enabled
-            return;
-        }
-
-        const mousePos = this.root.app.mousePosition;
-        if (!mousePos) {
-            return;
-        }
-
-        if (this.root.hud.shouldPauseGame() || this.root.hud.hasBlockingOverlayOpen()) {
-            return;
-        }
-
-        if (this.desiredCenter || this.desiredZoom || this.currentlyMoving || this.currentlyPinching) {
-            // Performing another method of movement right now
-            return;
-        }
-
-        if (
-            mousePos.x < 0 ||
-            mousePos.y < 0 ||
-            mousePos.x > this.root.gameWidth ||
-            mousePos.y > this.root.gameHeight
-        ) {
-            // Out of screen
-            return;
-        }
-
-        const panAreaPixels = 2;
-
-        const panVelocity = new Vector();
-        if (mousePos.x < panAreaPixels) {
-            panVelocity.x -= 1;
-        }
-        if (mousePos.x > this.root.gameWidth - panAreaPixels) {
-            panVelocity.x += 1;
-        }
-
-        if (mousePos.y < panAreaPixels) {
-            panVelocity.y -= 1;
-        }
-        if (mousePos.y > this.root.gameHeight - panAreaPixels) {
-            panVelocity.y += 1;
-        }
-
-        this.center = this.center.add(
-            panVelocity.multiplyScalar(
-                ((0.5 * dt) / this.zoomLevel) * this.root.app.settings.getMovementSpeed()
-            )
-        );
     }
 
     /**
@@ -955,7 +829,7 @@ export class Camera extends BasicSerializableObject {
      * @param {number} dt Delta time
      */
     internalUpdateCentering(now, dt) {
-        if (!this.currentlyMoving && this.desiredCenter !== null) {
+        if (this.desiredCenter !== null) {
             const diff = this.center.direction(this.desiredCenter);
             const length = diff.length();
             const tolerance = 1 / this.zoomLevel;
@@ -966,46 +840,6 @@ export class Camera extends BasicSerializableObject {
             } else {
                 this.desiredCenter = null;
             }
-        }
-    }
-
-    /**
-     * Updates the keyboard forces
-     * @param {number} now
-     * @param {number} dt Delta time
-     */
-    internalUpdateKeyboardForce(now, dt) {
-        if (!this.currentlyMoving && this.desiredCenter == null) {
-            const limitingDimension = Math.min(this.root.gameWidth, this.root.gameHeight);
-
-            const moveAmount = ((limitingDimension / 2048) * dt) / this.zoomLevel;
-
-            let forceX = 0;
-            let forceY = 0;
-
-            const actionMapper = this.root.keyMapper;
-            if (actionMapper.getBinding(KEYMAPPINGS.navigation.mapMoveUp).pressed) {
-                forceY -= 1;
-            }
-
-            if (actionMapper.getBinding(KEYMAPPINGS.navigation.mapMoveDown).pressed) {
-                forceY += 1;
-            }
-
-            if (actionMapper.getBinding(KEYMAPPINGS.navigation.mapMoveLeft).pressed) {
-                forceX -= 1;
-            }
-
-            if (actionMapper.getBinding(KEYMAPPINGS.navigation.mapMoveRight).pressed) {
-                forceX += 1;
-            }
-
-            let movementSpeed =
-                this.root.app.settings.getMovementSpeed() *
-                (actionMapper.getBinding(KEYMAPPINGS.navigation.mapMoveFaster).pressed ? 4 : 1);
-
-            this.center.x += moveAmount * forceX * movementSpeed;
-            this.center.y += moveAmount * forceY * movementSpeed;
         }
     }
 }
