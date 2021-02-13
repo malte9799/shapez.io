@@ -82,8 +82,8 @@ export const globalConfig = {
     },
 
     // Zooming
-    initialZoom: 1.9,
-    minZoomLevel: 0.1,
+    initialZoom: 1,
+    minZoomLevel: 1,
     maxZoomLevel: 3,
 
     // Global game speed
