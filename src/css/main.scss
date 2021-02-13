@@ -53,6 +53,7 @@
 @import "ingame_hud/sandbox_controller";
 @import "ingame_hud/standalone_advantages";
 @import "ingame_hud/cat_memes";
+@import "ingame_hud/level_selector";
 
 // prettier-ignore
 $elements:
@@ -93,7 +94,8 @@ ingame_HUD_StandaloneAdvantages,
 ingame_HUD_UnlockNotification,
 ingame_HUD_SettingsMenu,
 ingame_HUD_ModalDialogs,
-ingame_HUD_CatMemes;
+ingame_HUD_CatMemes,
+ingame_HUD_LevelSelector;
 
 $zindex: 100;
 

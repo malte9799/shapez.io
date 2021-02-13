@@ -346,6 +346,7 @@ ingame:
         completed: Completed
         unlockText: Unlocked <reward>!
         buttonNextLevel: Next Level
+        buttonLevelSelect: Select Level
 
     # Notifications on the lower right
     notifications:
@@ -495,6 +496,9 @@ ingame:
             support:
                 title: Support me
                 desc: I develop the game in my spare time!
+
+    levelSelector:
+        title: Level Selector
 
 # Buildings and their name / description
 buildings:

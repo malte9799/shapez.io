@@ -1,0 +1,38 @@
+#ingame_HUD_LevelSelector {
+    $dims: 350px;
+
+    .content {
+        display: flex;
+        @include S(width, $dims);
+        width: 100%;
+        flex-direction: column;
+        overflow-x: hidden;
+
+        .levels {
+            @include S(margin-top, 10px);
+            display: grid;
+            max-width: $dims;
+            max-height: $dims;
+            overflow-y: auto;
+            overflow-x: hidden;
+            grid-template-columns: repeat(auto-fill, 60px);
+            justify-content: space-between;
+            align-items: center;
+            grid-gap: 10px;
+
+            .level {
+                @include PlainText;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: skyblue;
+                width: auto;
+                height: 50px;
+                font-size: 1rem;
+                border: none;
+                outline-color: #00a8ef;
+                cursor: pointer;
+            }
+        }
+    }
+}
