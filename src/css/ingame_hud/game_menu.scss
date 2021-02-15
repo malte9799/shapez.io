@@ -37,6 +37,14 @@
 
         @include DarkThemeInvert;
 
+        &.levelSelector {
+            grid-column: 1;
+            & {
+                /* @load-async */
+                background-image: uiResource("icons/level_selector.png");
+            }
+        }
+
         &.stats {
             grid-column: 2;
             & {
