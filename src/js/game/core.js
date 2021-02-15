@@ -162,7 +162,7 @@ export class GameCore {
         this.root.gameIsFresh = true;
         this.root.map.seed = randomInt(0, 100000);
 
-        this.root.signals.loadLevel.dispatch(0);
+        this.root.hud.parts.levelSelector.load(0);
     }
 
     /**
@@ -184,9 +184,9 @@ export class GameCore {
         }
         this.root.gameIsFresh = false;
         if (this.root.hubGoals.level > gLevelRegistry.entries.length) {
-            this.root.signals.openLevelSelector.dispatch();
+            this.root.hud.parts.levelSelector.show();
         } else {
-            this.root.signals.loadLevel.dispatch(this.root.hubGoals.level - 1);
+            this.root.hud.parts.levelSelector.load(this.root.hubGoals.level - 1);
         }
 
         return true;

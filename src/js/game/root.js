@@ -157,9 +157,6 @@ export class GameRoot {
 
             storyGoalCompleted: /** @type {TypedSignal<[number, string]>} */ (new Signal()),
 
-            openLevelSelector: /** @type {TypedSignal<[]>} */ (new Signal()),
-            loadLevel: /** @type {TypedSignal<[number]>} */ (new Signal()),
-
             // Called right after game is initialized
             postLoadHook: /** @type {TypedSignal<[]>} */ (new Signal()),
 

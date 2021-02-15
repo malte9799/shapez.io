@@ -32,9 +32,6 @@ export class HUDLevelSetector extends BaseHUDPart {
     }
 
     initialize() {
-        this.root.signals.openLevelSelector.add(this.show, this);
-        this.root.signals.loadLevel.add(this.load, this);
-
         this.domAttach = new DynamicDomAttach(this.root, this.background, {
             attachClass: "visible",
         });
@@ -48,7 +45,8 @@ export class HUDLevelSetector extends BaseHUDPart {
     }
 
     show() {
-        this.visible = !this.visible;
+        this.visible = true;
+        this.root.app.inputMgr.makeSureAttachedAndOnTop(this.inputReciever);
     }
 
     isBlockingOverlay() {
@@ -59,7 +57,7 @@ export class HUDLevelSetector extends BaseHUDPart {
      * Called when the loading a Level was requested
      */
     onLevelRequested(level) {
-        this.visible = false;
+        this.close();
         this.load(level);
     }
 

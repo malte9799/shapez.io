@@ -73,9 +73,11 @@ export class HUDGameMenu extends BaseHUDPart {
 
         this.saveButton = makeDiv(this.element, null, ["button", "save", "animEven"]);
         this.settingsButton = makeDiv(this.element, null, ["button", "settings"]);
+        this.levelSelectorButton = makeDiv(this.element, null, ["button", "levelSelector"]);
 
         this.trackClicks(this.saveButton, this.startSave);
         this.trackClicks(this.settingsButton, this.openSettings);
+        this.trackClicks(this.levelSelectorButton, this.openLevelSelector);
     }
 
     initialize() {
@@ -157,5 +159,9 @@ export class HUDGameMenu extends BaseHUDPart {
 
     openSettings() {
         this.root.hud.parts.settingsMenu.show();
+    }
+
+    openLevelSelector() {
+        this.root.hud.parts.levelSelector.show();
     }
 }
