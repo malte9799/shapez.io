@@ -10,7 +10,21 @@ export class Level_7 extends Level {
         return new Vector(8, 7);
     }
 
-    // { root, origin, rotation, originalRotation, rotationVariant, variant }
+    getTotalBuildingsNeeded() {
+        let buildings = this.getBaseBuildingsNeeded();
+        buildings.set("rotater.default", { count: 1 });
+        buildings.set("painter.default", { count: 2 });
+        buildings.set("belt.default", { count: 10 });
+        buildings.set("mixer.default", { count: 2 });
+        buildings.set("cutter.default", { count: 1 });
+        buildings.set("rotater.ccw", { count: 1 });
+        buildings.set("underground_belt.default", { count: 4 });
+        buildings.set("balancer.splitter-inverse", { count: 1 });
+        buildings.set("stacker.default", { count: 1 });
+
+        return buildings;
+    }
+
     setupLevel(root) {
         return [
             ["hub", new Vector(7, 4), "left", 0, 0, "default"],
