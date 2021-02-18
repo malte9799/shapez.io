@@ -18,6 +18,7 @@ export class HubGoals extends BasicSerializableObject {
         return {
             level: types.uint,
             storedShapes: types.keyValueMap(types.uint),
+            level_completed: types.uint,
         };
     }
 
@@ -49,6 +50,7 @@ export class HubGoals extends BasicSerializableObject {
 
         // Compute current goal
         this.computeNextGoal();
+        console.log(this.level_completed);
     }
 
     /**
@@ -60,6 +62,7 @@ export class HubGoals extends BasicSerializableObject {
         this.root = root;
 
         this.level = 1;
+        this.level_completed = 0;
 
         /**
          * Which story rewards we already gained
@@ -203,6 +206,9 @@ export class HubGoals extends BasicSerializableObject {
      * Called when the level was completed
      */
     onGoalCompleted() {
+        if (this.level <= this.level_completed) return;
+        this.level_completed = this.level;
+
         const reward = this.currentGoal.reward;
         this.gainedRewards[reward] = (this.gainedRewards[reward] || 0) + 1;
 
@@ -219,7 +225,6 @@ export class HubGoals extends BasicSerializableObject {
     isFreePlay() {
         return this.level >= this.root.gameMode.getLevelDefinitions().length;
     }
-
 
     /**
      * Picks random colors which are close to each other
@@ -385,10 +390,7 @@ export class HubGoals extends BasicSerializableObject {
                     globalConfig.buildingSpeeds[processorType],
                     "Processor type has no speed set in globalConfig.buildingSpeeds: " + processorType
                 );
-                return (
-                    globalConfig.beltSpeedItemsPerSecond *
-                    globalConfig.buildingSpeeds[processorType]
-                );
+                return globalConfig.beltSpeedItemsPerSecond * globalConfig.buildingSpeeds[processorType];
             }
 
             case enumItemProcessorTypes.cutter:
@@ -401,10 +403,7 @@ export class HubGoals extends BasicSerializableObject {
                     globalConfig.buildingSpeeds[processorType],
                     "Processor type has no speed set in globalConfig.buildingSpeeds: " + processorType
                 );
-                return (
-                    globalConfig.beltSpeedItemsPerSecond *
-                    globalConfig.buildingSpeeds[processorType]
-                );
+                return globalConfig.beltSpeedItemsPerSecond * globalConfig.buildingSpeeds[processorType];
             }
             default:
                 assertAlways(false, "invalid processor type: " + processorType);

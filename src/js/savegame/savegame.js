@@ -266,7 +266,7 @@ export class Savegame extends ReadWriteProxy {
         if (!this.hasGameDump()) {
             this.metaDataRef.level = 0;
         } else {
-            this.metaDataRef.level = this.currentData.dump.hubGoals.level;
+            this.metaDataRef.level = this.currentData.dump.hubGoals.level_completed;
         }
 
         return this.app.savegameMgr.writeAsync();
