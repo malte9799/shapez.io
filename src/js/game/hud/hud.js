@@ -30,7 +30,6 @@ import { HUDWatermark } from "./parts/watermark";
 import { HUDModalDialogs } from "./parts/modal_dialogs";
 import { HUDPartTutorialHints } from "./parts/tutorial_hints";
 import { HUDWaypoints } from "./parts/waypoints";
-import { HUDInteractiveTutorial } from "./parts/interactive_tutorial";
 import { HUDScreenshotExporter } from "./parts/screenshot_exporter";
 import { HUDColorBlindHelper } from "./parts/color_blind_helper";
 import { HUDShapeViewer } from "./parts/shape_viewer";
@@ -88,6 +87,7 @@ export class GameHUD {
             leverToggle: new HUDLeverToggle(this.root),
             constantSignalEdit: new HUDConstantSignalEdit(this.root),
             levelSelector: new HUDLevelSetector(this.root),
+            tutorial_hints: new HUDPartTutorialHints(this.root),
 
             // Must always exist
             pinnedShapes: new HUDPinnedShapes(this.root),
@@ -127,11 +127,6 @@ export class GameHUD {
 
         if (G_IS_DEV && globalConfig.debug.renderChanges) {
             this.parts.changesDebugger = new HUDChangesDebugger(this.root);
-        }
-
-        if (this.root.app.settings.getAllSettings().offerHints) {
-            this.parts.tutorialHints = new HUDPartTutorialHints(this.root);
-            this.parts.interactiveTutorial = new HUDInteractiveTutorial(this.root);
         }
 
         if (this.root.app.settings.getAllSettings().vignette) {
