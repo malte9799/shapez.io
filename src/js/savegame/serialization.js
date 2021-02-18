@@ -282,6 +282,7 @@ export function deserializeSchema(obj, schema, data, baseclassErrorResult = null
 
     for (const key in schema) {
         if (!data.hasOwnProperty(key)) {
+            if (obj.constructor.name == "HubGoals") continue;
             logger.error("Data", data, "does not contain", key, "(schema:", schema, ")");
             return "Missing key in schema: " + key + " of class " + obj.constructor.name;
         }
