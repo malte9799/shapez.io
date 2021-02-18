@@ -25,13 +25,23 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background: skyblue;
                 width: auto;
                 height: 50px;
-                font-size: 1rem;
+                font-size: 1.5rem;
+                font-weight: 400;
                 border: none;
-                outline-color: #00a8ef;
-                cursor: pointer;
+                background-color: #555;
+                cursor: default;
+
+                &.unlocked {
+                    background: #4a97df;
+                    cursor: pointer;
+                }
+
+                &.completed {
+                    background: #66bb6a;
+                    cursor: pointer;
+                }
             }
         }
     }

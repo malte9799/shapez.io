@@ -25,8 +25,8 @@ export class HUDLevelSetector extends BaseHUDPart {
             this.levelButton = document.createElement("button");
             this.levelButton.classList.add("styledButton", "level");
             this.levelButton.innerText = (level + 1).toString();
-            this.levels.appendChild(this.levelButton);
 
+            this.levels.appendChild(this.levelButton);
             this.trackClicks(this.levelButton, () => this.onLevelRequested(level));
         }
     }
@@ -45,6 +45,12 @@ export class HUDLevelSetector extends BaseHUDPart {
     }
 
     show() {
+        const levelButtons = this.levels.children;
+        for (let i = 0; i < levelButtons.length; i++) {
+            const e = levelButtons[i];
+            if (i <= this.root.hubGoals.level_completed) e.classList.add("unlocked");
+            if (i <= this.root.hubGoals.level_completed - 1) e.classList.add("completed");
+        }
         this.visible = true;
         this.root.app.inputMgr.makeSureAttachedAndOnTop(this.inputReciever);
     }
@@ -57,6 +63,8 @@ export class HUDLevelSetector extends BaseHUDPart {
      * Called when the loading a Level was requested
      */
     onLevelRequested(level) {
+        if (level > this.root.hubGoals.level_completed) return;
+
         this.close();
         this.load(level);
 
