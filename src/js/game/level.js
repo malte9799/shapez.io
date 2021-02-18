@@ -165,7 +165,6 @@ export class Level {
 
         totalBuildings.forEach((value, key) => {
             if (placedBuildings.has(key)) {
-                console.log(key, value, placedBuildings.get(key));
                 const count = placedBuildings.get(key)["count"];
                 if (value["count"] - count == 0) {
                     totalBuildings.delete(key);
@@ -207,7 +206,6 @@ export class Level {
         }
 
         arr.forEach(function (x) {
-            console.log(x);
             let newCount = 1;
             if (counts.has(x)) {
                 newCount = counts.get(x)["count"] + 1;
