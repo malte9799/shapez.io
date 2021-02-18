@@ -53,6 +53,9 @@ export class HUDBuildingPlacer extends HUDBuildingPlacerLogic {
 
         // Bind to signals
         this.signals.variantChanged.add(this.rerenderVariants, this);
+        this.root.signals.entityDestroyed.add(this.rerenderVariants, this);
+        this.root.signals.entityManuallyPlaced.add(this.rerenderVariants, this);
+
         this.root.hud.signals.buildingSelectedForPlacement.add(this.startSelection, this);
 
         this.domAttach = new DynamicDomAttach(this.root, this.element, { trackHover: true });
@@ -176,6 +179,8 @@ export class HUDBuildingPlacer extends HUDBuildingPlacerLogic {
         this.rerenderInfoDialog();
 
         const metaBuilding = this.currentMetaBuilding.get();
+        const hint_number = this.root.hud.parts.tutorial_hints.hint_number;
+        const buildings_needed = this.root.hud.parts.tutorial_hints.getBuildingsNeeded();
 
         // First, clear up all click detectors
         this.cleanupVariantClickDetectors();
@@ -211,13 +216,27 @@ export class HUDBuildingPlacer extends HUDBuildingPlacerLogic {
             element.classList.toggle("active", variant === this.currentVariant.get());
             makeDiv(element, null, ["label"], variant);
 
+            const value = buildings_needed.get(`${metaBuilding.id}.${variant}`);
+            if (value) {
+                if (hint_number >= 1) {
+                    element.classList.add("hint_needed_buildings");
+                }
+                if (hint_number >= 2) {
+                    element.classList.add("hint_2");
+                    const p = element.querySelector(".hint") || document.createElement("p");
+                    p.innerHTML = value["count"];
+                    p.classList.add("hint");
+                    element.appendChild(p);
+                }
+            }
+
             const iconSize = 64;
 
             const dimensions = metaBuilding.getDimensions(variant);
             const sprite = metaBuilding.getPreviewSprite(0, variant);
             const spriteWrapper = makeDiv(element, null, ["iconWrap"]);
-            spriteWrapper.setAttribute("data-tile-w", dimensions.x);
-            spriteWrapper.setAttribute("data-tile-h", dimensions.y);
+            spriteWrapper.setAttribute("data-tile-w", dimensions.x.toString());
+            spriteWrapper.setAttribute("data-tile-h", dimensions.y.toString());
 
             spriteWrapper.innerHTML = sprite.getAsHTML(iconSize * dimensions.x, iconSize * dimensions.y);
 

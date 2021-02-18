@@ -231,20 +231,21 @@ export class HUDBaseToolbar extends BaseHUDPart {
 
     showHint(hint_number, buildings_needed) {
         buildings_needed.forEach((value, key) => {
+            const metaBuilding = gMetaBuildingRegistry.findById(key.split(".")[0]);
+            const availableVariants = metaBuilding.getAvailableVariants(this.root).length !== 1;
+
             const handle = this.buildingHandles[key.split(".")[0]];
             if (hint_number >= 1) {
                 handle.element.classList.add("hint_needed_buildings");
-
-                // change color when negative
-                if (value["count"] >= 0) handle.element.classList.remove("negative");
-                if (value["count"] < 0) handle.element.classList.add("negative");
             }
             if (hint_number >= 2) {
-                handle.element.classList.add("hint_2");
-                const p = handle.element.querySelector(".hint") || document.createElement("p");
-                p.innerHTML = value["count"];
-                p.classList.add("hint");
-                handle.element.appendChild(p);
+                if (!availableVariants) {
+                    handle.element.classList.add("hint_2");
+                    const p = handle.element.querySelector(".hint") || document.createElement("p");
+                    p.innerHTML = value["count"];
+                    p.classList.add("hint");
+                    handle.element.appendChild(p);
+                }
             }
         });
     }
@@ -253,6 +254,7 @@ export class HUDBaseToolbar extends BaseHUDPart {
         buildings.forEach((value, key) => {
             const handle = this.buildingHandles[key.split(".")[0]];
             handle.element.classList.remove("hint_needed_buildings");
+            handle.element.classList.remove("negative");
             handle.element.classList.remove("hint_2");
             const p = handle.element.querySelector(".hint");
             if (p !== null) p.remove();
