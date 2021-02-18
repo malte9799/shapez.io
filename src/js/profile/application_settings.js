@@ -200,8 +200,6 @@ export const allApplicationSettings = [
         (app, value) => null
     ),
 
-    new BoolSetting("offerHints", enumCategories.userInterface, (app, value) => {}),
-
     new EnumSetting("theme", {
         options: Object.keys(THEMES),
         valueGetter: theme => theme,
@@ -247,18 +245,7 @@ export const allApplicationSettings = [
             (app, id) => app.updateAfterUiScaleChanged(),
     }),
 
-    new EnumSetting("movementSpeed", {
-        options: movementSpeeds.sort((a, b) => a.multiplier - b.multiplier),
-        valueGetter: multiplier => multiplier.id,
-        textGetter: multiplier => T.settings.labels.movementSpeed.speeds[multiplier.id],
-        category: enumCategories.advanced,
-        restartRequired: false,
-        changeCb: (app, id) => {},
-    }),
-
-    new BoolSetting("enableMousePan", enumCategories.advanced, (app, value) => {}),
     new BoolSetting("alwaysMultiplace", enumCategories.advanced, (app, value) => {}),
-    new BoolSetting("zoomToCursor", enumCategories.advanced, (app, value) => {}),
     new BoolSetting("clearCursorOnDeleteWhilePlacing", enumCategories.advanced, (app, value) => {}),
     new BoolSetting("enableTunnelSmartplace", enumCategories.advanced, (app, value) => {}),
     new BoolSetting("vignette", enumCategories.userInterface, (app, value) => {}),
@@ -266,8 +253,6 @@ export const allApplicationSettings = [
     new BoolSetting("disableCutDeleteWarnings", enumCategories.advanced, (app, value) => {}),
     new BoolSetting("rotationByBuilding", enumCategories.advanced, (app, value) => {}),
     new BoolSetting("displayChunkBorders", enumCategories.advanced, (app, value) => {}),
-    new BoolSetting("pickMinerOnPatch", enumCategories.advanced, (app, value) => {}),
-    new RangeSetting("mapResourcesScale", enumCategories.advanced, () => null),
 
     new EnumSetting("refreshRate", {
         options: refreshRateOptions,
@@ -282,7 +267,6 @@ export const allApplicationSettings = [
     }),
 
     new BoolSetting("lowQualityMapResources", enumCategories.performance, (app, value) => {}),
-    new BoolSetting("disableTileGrid", enumCategories.performance, (app, value) => {}),
     new BoolSetting("lowQualityTextures", enumCategories.performance, (app, value) => {}),
     new BoolSetting("simplifiedBelts", enumCategories.performance, (app, value) => {}),
 ];
@@ -302,12 +286,10 @@ class SettingsStorage {
         this.theme = "light";
         this.refreshRate = "60";
         this.scrollWheelSensitivity = "regular";
-        this.movementSpeed = "regular";
         this.language = "auto-detect";
         this.autosaveInterval = "two_minutes";
 
         this.alwaysMultiplace = false;
-        this.offerHints = true;
         this.enableTunnelSmartplace = true;
         this.vignette = true;
         this.compactBuildingInfo = false;
@@ -315,17 +297,13 @@ class SettingsStorage {
         this.rotationByBuilding = true;
         this.clearCursorOnDeleteWhilePlacing = true;
         this.displayChunkBorders = false;
-        this.pickMinerOnPatch = true;
-        this.enableMousePan = true;
 
         this.enableColorBlindHelper = false;
 
         this.lowQualityMapResources = false;
-        this.disableTileGrid = false;
         this.lowQualityTextures = false;
         this.simplifiedBelts = false;
         this.zoomToCursor = true;
-        this.mapResourcesScale = 0.5;
 
         /**
          * @type {Object.<string, number>}
@@ -410,13 +388,6 @@ export class ApplicationSettings extends ReadWriteProxy {
     }
 
     getMovementSpeed() {
-        const id = this.getAllSettings().movementSpeed;
-        for (let i = 0; i < movementSpeeds.length; ++i) {
-            if (movementSpeeds[i].id === id) {
-                return movementSpeeds[i].multiplier;
-            }
-        }
-        logger.error("Unknown movement speed id:", id);
         return 1;
     }
 
@@ -554,7 +525,6 @@ export class ApplicationSettings extends ReadWriteProxy {
         }
 
         if (data.version < 7) {
-            data.settings.offerHints = true;
             data.version = 7;
         }
 
@@ -569,7 +539,6 @@ export class ApplicationSettings extends ReadWriteProxy {
         }
 
         if (data.version < 10) {
-            data.settings.movementSpeed = "regular";
             data.version = 10;
         }
 
@@ -655,7 +624,6 @@ export class ApplicationSettings extends ReadWriteProxy {
         }
 
         if (data.version < 26) {
-            data.settings.pickMinerOnPatch = true;
             data.version = 26;
         }
 
@@ -665,7 +633,6 @@ export class ApplicationSettings extends ReadWriteProxy {
         }
 
         if (data.version < 28) {
-            data.settings.enableMousePan = true;
             data.version = 28;
         }
 
@@ -675,11 +642,6 @@ export class ApplicationSettings extends ReadWriteProxy {
         }
 
         if (data.version < 30) {
-            data.settings.mapResourcesScale = 0.5;
-
-            // Re-enable hints as well
-            data.settings.offerHints = true;
-
             data.version = 30;
         }
 
