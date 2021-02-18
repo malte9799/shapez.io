@@ -1,5 +1,15 @@
 export const CHANGELOG = [
     {
+        version: "Puzzlemode: 0.1.1",
+        date: "18.02.2021",
+        entries: [
+            "You can now only play a level when you completed the level before.",
+            "Added the option to get Hints.",
+            "Click the Hint button once to get shown which buildings you need.",
+            "Press it another time to get how many of each building you need.",
+        ],
+    },
+    {
         version: "Puzzlemode: 0.1.0",
         date: "13.02.2021",
         entries: [
