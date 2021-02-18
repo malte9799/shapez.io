@@ -186,22 +186,20 @@ export class MapView extends BaseMap {
      */
     drawBackground(parameters) {
         // Render tile grid
-        if (!this.root.app.settings.getAllSettings().disableTileGrid) {
-            const dpi = this.backgroundCacheDPI;
-            parameters.context.scale(1 / dpi, 1 / dpi);
+        const dpi = this.backgroundCacheDPI;
+        parameters.context.scale(1 / dpi, 1 / dpi);
 
-            parameters.context.fillStyle = parameters.context.createPattern(
-                this.cachedBackgroundCanvas,
-                "repeat"
-            );
-            parameters.context.fillRect(
-                parameters.visibleRect.x * dpi,
-                parameters.visibleRect.y * dpi,
-                parameters.visibleRect.w * dpi,
-                parameters.visibleRect.h * dpi
-            );
-            parameters.context.scale(dpi, dpi);
-        }
+        parameters.context.fillStyle = parameters.context.createPattern(
+            this.cachedBackgroundCanvas,
+            "repeat"
+        );
+        parameters.context.fillRect(
+            parameters.visibleRect.x * dpi,
+            parameters.visibleRect.y * dpi,
+            parameters.visibleRect.w * dpi,
+            parameters.visibleRect.h * dpi
+        );
+        parameters.context.scale(dpi, dpi);
 
         this.drawVisibleChunks(parameters, MapChunkView.prototype.drawBackgroundLayer);
     }
