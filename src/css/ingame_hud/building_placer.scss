@@ -189,6 +189,35 @@
                 @include SuperSmallText;
                 color: #fff;
             }
+
+            &.hint_needed_buildings {
+                &::before {
+                    content: "";
+
+                    position: absolute;
+                    top: 4px;
+                    right: 4px;
+                    width: 15px;
+                    height: 15px;
+                    border-radius: 50%;
+                    z-index: 4;
+                    background-color: #ff6666;
+                    border: #111 solid 0px;
+                }
+
+                p {
+                    display: block;
+                    position: absolute;
+                    top: -1px;
+                    right: 3.5px;
+                    width: 15px;
+                    height: 15px;
+                    color: #fff;
+                    font-size: 12px;
+                    z-index: 4;
+                    text-align: center;
+                }
+            }
         }
     }
 }
