@@ -190,6 +190,9 @@ export class Level {
         let arr = [];
         let counts = new Map();
 
+        // tests if the level is loaded
+        if (!this.root) return counts;
+
         for (let x = origin.x + 1; x <= origin.x + dim.x - 2; ++x) {
             for (let y = origin.y + 1; y <= origin.y + dim.y - 2; ++y) {
                 const contents = this.root.map.getLayerContentXY(x, y, this.root.currentLayer);
