@@ -50,7 +50,6 @@ export class HubGoals extends BasicSerializableObject {
 
         // Compute current goal
         this.computeNextGoal();
-        console.log(this.level_completed);
     }
 
     /**

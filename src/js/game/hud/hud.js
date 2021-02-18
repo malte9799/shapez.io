@@ -45,7 +45,6 @@ import { HUDMinerHighlight } from "./parts/miner_highlight";
 import { HUDBetaOverlay } from "./parts/beta_overlay";
 import { HUDStandaloneAdvantages } from "./parts/standalone_advantages";
 import { HUDCatMemes } from "./parts/cat_memes";
-import { HUDTutorialVideoOffer } from "./parts/tutorial_video_offer";
 import { HUDConstantSignalEdit } from "./parts/constant_signal_edit";
 import { HUDLevelSetector } from "./parts/level_selector";
 
@@ -102,7 +101,6 @@ export class GameHUD {
             layerPreview: new HUDLayerPreview(this.root),
 
             minerHighlight: new HUDMinerHighlight(this.root),
-            tutorialVideoOffer: new HUDTutorialVideoOffer(this.root),
 
             // Typing hints
             /* typehints:start */
