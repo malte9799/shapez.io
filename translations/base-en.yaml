@@ -384,8 +384,9 @@ ingame:
     # Bottom left tutorial hints
     tutorialHints:
         title: Need help?
-        showHint: Show hint
-        hideHint: Close
+        showHint:
+            0: Show hint
+            1: Show extra hint
 
     # When placing a blueprint
     blueprintPlacer:
