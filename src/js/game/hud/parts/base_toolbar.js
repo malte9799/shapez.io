@@ -178,8 +178,7 @@ export class HUDBaseToolbar extends BaseHUDPart {
             return;
         }
         const metaBuildingClass = this.primaryBuildings[newIndex];
-        const metaBuilding = gMetaBuildingRegistry.findByClass(metaBuildingClass);
-        this.selectBuildingForPlacement(metaBuilding);
+        this.selectBuildingForPlacement(gMetaBuildingRegistry.findByClass(metaBuildingClass));
     }
 
     /**
@@ -228,5 +227,35 @@ export class HUDBaseToolbar extends BaseHUDPart {
         this.root.soundProxy.playUiClick();
         this.root.hud.signals.buildingSelectedForPlacement.dispatch(metaBuilding);
         this.onSelectedPlacementBuildingChanged(metaBuilding);
+    }
+
+    showHint(hint_number, buildings_needed) {
+        buildings_needed.forEach((value, key) => {
+            const handle = this.buildingHandles[key.split(".")[0]];
+            if (hint_number >= 1) {
+                handle.element.classList.add("hint_needed_buildings");
+
+                // change color when negative
+                if (value["count"] >= 0) handle.element.classList.remove("negative");
+                if (value["count"] < 0) handle.element.classList.add("negative");
+            }
+            if (hint_number >= 2) {
+                handle.element.classList.add("hint_2");
+                const p = handle.element.querySelector(".hint") || document.createElement("p");
+                p.innerHTML = value["count"];
+                p.classList.add("hint");
+                handle.element.appendChild(p);
+            }
+        });
+    }
+
+    resetHints(buildings) {
+        buildings.forEach((value, key) => {
+            const handle = this.buildingHandles[key.split(".")[0]];
+            handle.element.classList.remove("hint_needed_buildings");
+            handle.element.classList.remove("hint_2");
+            const p = handle.element.querySelector(".hint");
+            if (p !== null) p.remove();
+        });
     }
 }

@@ -5,10 +5,16 @@ import { KeyActionMapper, KEYMAPPINGS } from "../../key_action_mapper";
 import { BaseHUDPart } from "../base_hud_part";
 import { DynamicDomAttach } from "../dynamic_dom_attach";
 import { T } from "../../../translations";
+import { gLevelRegistry } from "../../../core/global_registries";
 
 const tutorialVideos = [2, 3, 4, 5, 6, 7, 9, 10, 11];
 
 export class HUDPartTutorialHints extends BaseHUDPart {
+    constructor(root) {
+        super(root);
+        this.hint_number = 0;
+    }
+
     createElements(parent) {
         this.element = makeDiv(
             parent,
@@ -17,90 +23,58 @@ export class HUDPartTutorialHints extends BaseHUDPart {
             `
         <div class="header">
             <span>${T.ingame.tutorialHints.title}</span>
-            <button class="styledButton toggleHint">
-                <span class="show">${T.ingame.tutorialHints.showHint}</span>
-                <span class="hide">${T.ingame.tutorialHints.hideHint}</span>
+            <button class="styledButton showHint">
+                <span class="hintText"></span>
             </button>
         </div>
-
-        <video autoplay muted loop class="fullscreenBackgroundVideo">
-            <source type="video/webm">
-        </video>
         `
         );
 
-        this.videoElement = this.element.querySelector("video");
-    }
-
-    shouldPauseGame() {
-        return this.enlarged;
+        this.updateButtonText();
     }
 
     initialize() {
-        this.trackClicks(this.element.querySelector(".toggleHint"), this.toggleHintEnlarged);
+        this.trackClicks(this.element.querySelector(".showHint"), this.showHint);
 
-        this.videoAttach = new DynamicDomAttach(this.root, this.videoElement, {
-            timeToKeepSeconds: 0.3,
-        });
+        this.root.signals.entityDestroyed.add(this.updateHint, this);
+        this.root.signals.entityManuallyPlaced.add(this.updateHint, this);
 
-        this.videoAttach.update(false);
-        this.enlarged = false;
+        this.visible = true;
 
         this.inputReciever = new InputReceiver("tutorial_hints");
         this.keyActionMapper = new KeyActionMapper(this.root, this.inputReciever);
-        this.keyActionMapper.getBinding(KEYMAPPINGS.general.back).add(this.close, this);
 
         this.domAttach = new DynamicDomAttach(this.root, this.element);
-
-        this.currentShownLevel = new TrackedState(this.updateVideoUrl, this);
     }
 
-    updateVideoUrl(level) {
-        if (tutorialVideos.indexOf(level) < 0) {
-            this.videoElement.querySelector("source").setAttribute("src", "");
-            this.videoElement.pause();
-        } else {
-            this.videoElement
-                .querySelector("source")
-                .setAttribute("src", "https://static.shapez.io/tutorial_videos/level_" + level + ".webm");
-            this.videoElement.currentTime = 0;
-            this.videoElement.load();
-        }
+    showHint() {
+        this.hint_number += 1;
+
+        this.updateHint();
+        this.updateButtonText();
     }
 
-    close() {
-        this.enlarged = false;
-        this.element.classList.remove("enlarged", "noBlur");
-        this.root.app.inputMgr.makeSureDetached(this.inputReciever);
-        this.update();
+    updateHint() {
+        const level = this.root.hubGoals.level;
+        const buildings_needed = gLevelRegistry.entries[level - 1].getBuildingsNeeded();
+        const total_buildings_needed = gLevelRegistry.entries[level - 1].getTotalBuildingsNeeded();
+
+        this.root.hud.parts.buildingsToolbar.resetHints(total_buildings_needed);
+
+        this.root.hud.parts.buildingsToolbar.showHint(this.hint_number, buildings_needed);
     }
 
-    show() {
-        this.root.app.analytics.trackUiClick("tutorial_hint_show");
-        this.root.app.analytics.trackUiClick("tutorial_hint_show_lvl_" + this.root.hubGoals.level);
-        this.element.classList.add("enlarged", "noBlur");
-        this.enlarged = true;
-        this.root.app.inputMgr.makeSureAttachedAndOnTop(this.inputReciever);
-        this.update();
+    updateButtonText() {
+        this.element.querySelector(".hintText").innerHTML = T.ingame.tutorialHints.showHint[this.hint_number];
+    }
 
-        this.videoElement.currentTime = 0;
-        this.videoElement.play();
+    reset() {
+        this.hint_number = 0;
+        this.updateButtonText();
+        this.updateHint();
     }
 
     update() {
-        this.videoAttach.update(this.enlarged);
-
-        this.currentShownLevel.set(this.root.hubGoals.level);
-
-        const tutorialVisible = tutorialVideos.indexOf(this.root.hubGoals.level) >= 0;
-        this.domAttach.update(tutorialVisible);
-    }
-
-    toggleHintEnlarged() {
-        if (this.enlarged) {
-            this.close();
-        } else {
-            this.show();
-        }
+        this.domAttach.update(this.visible);
     }
 }
