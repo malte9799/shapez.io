@@ -54,18 +54,27 @@ export class HUDPartTutorialHints extends BaseHUDPart {
         this.updateButtonText();
     }
 
+    getBuildingsNeeded() {
+        const level = this.root.hubGoals.level;
+        return gLevelRegistry.entries[level - 1].getBuildingsNeeded();
+    }
+
     updateHint() {
         const level = this.root.hubGoals.level;
         const buildings_needed = gLevelRegistry.entries[level - 1].getBuildingsNeeded();
         const total_buildings_needed = gLevelRegistry.entries[level - 1].getTotalBuildingsNeeded();
 
         this.root.hud.parts.buildingsToolbar.resetHints(total_buildings_needed);
-
         this.root.hud.parts.buildingsToolbar.showHint(this.hint_number, buildings_needed);
     }
 
     updateButtonText() {
-        this.element.querySelector(".hintText").innerHTML = T.ingame.tutorialHints.showHint[this.hint_number];
+        if (!T.ingame.tutorialHints.showHint[this.hint_number]) {
+            this.element.querySelector(".hintText").innerHTML = T.ingame.tutorialHints.noMoreHint;
+        } else {
+            this.element.querySelector(".hintText").innerHTML =
+                T.ingame.tutorialHints.showHint[this.hint_number];
+        }
     }
 
     reset() {
