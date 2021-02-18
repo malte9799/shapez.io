@@ -17,14 +17,6 @@
     transition-property: background-color, transform, bottom, left;
 
     @include S(padding, 5px);
-    video {
-        transition: all 0.2s ease-in-out;
-        transition-property: opacity, width;
-        @include S(width, 0px);
-        opacity: 0;
-        z-index: 10;
-        position: relative;
-    }
 
     .header {
         color: #333438;
@@ -56,65 +48,9 @@
             }
         }
 
-        button.toggleHint {
+        button.showHint {
             @include PlainText;
             @include IncreasedClickArea(0px);
-        }
-    }
-
-    button.toggleHint {
-        .hide {
-            display: none;
-        }
-    }
-
-    &.enlarged {
-        background: $ingameHudBg;
-        left: 50%;
-        bottom: 50%;
-        transform: translate(-50%, 50%);
-
-        &::before {
-            pointer-events: all;
-            content: " ";
-            position: fixed;
-            top: -1000px;
-            left: -1000px;
-            right: -1000px;
-            bottom: -1000px;
-            z-index: 0;
-
-            background: rgba($ingameHudBg, 0.3);
-        }
-
-        .header {
-            grid-template-columns: 1fr auto;
-            > span {
-                display: none;
-            }
-            button.toggleHint {
-                grid-column: 2 / 3;
-            }
-        }
-
-        video {
-            @include InlineAnimation(0.2s ease-in-out) {
-                0% {
-                    opacity: 0;
-                    @include S(width, 0px);
-                }
-            }
-
-            opacity: 1;
-            @include S(width, 500px);
-        }
-        button.toggleHint {
-            .hide {
-                display: block;
-            }
-            .show {
-                display: none;
-            }
         }
     }
 }
