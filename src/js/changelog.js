@@ -1,12 +1,23 @@
 export const CHANGELOG = [
     {
+        version: "Puzzlemode: 0.1.2",
+        date: "18.02.2021",
+        entries: [
+            "Mostly bugfixes",
+            "Hints have been added to a building variant to make it clear which building is required",
+            "Fix hints when compleing a level",
+            "Fix translation of hint button (became undefined on the 3rd press)",
+            "Fixed building needed for level 4",
+        ],
+    },
+    {
         version: "Puzzlemode: 0.1.1",
         date: "18.02.2021",
         entries: [
-            "You can now only play a level when you completed the level before.",
-            "Added the option to get Hints.",
-            "Click the Hint button once to get shown which buildings you need.",
-            "Press it another time to get how many of each building you need.",
+            "You can now only play a level when you completed the level before",
+            "Added the option to get Hints",
+            "Click the Hint button once to get shown which buildings you need",
+            "Press it another time to get how many of each building you need",
         ],
     },
     {
