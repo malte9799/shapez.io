@@ -57,6 +57,12 @@ export class HUDLevelSetector extends BaseHUDPart {
      * Called when the loading a Level was requested
      */
     onLevelRequested(level) {
+        this.root.hud.parts.tutorial_hints.reset();
+
+        // set hub level
+        this.root.hubGoals.level = level + 1;
+        this.root.hubGoals.computeNextGoal();
+
         this.close();
         this.load(level);
     }
