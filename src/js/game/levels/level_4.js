@@ -13,9 +13,10 @@ export class Level_4 extends Level {
     getTotalBuildingsNeeded() {
         let buildings = this.getBaseBuildingsNeeded();
         buildings.set("painter.mirrored", { count: 1 });
-        buildings.set("balancer.default", { count: 3 });
-        buildings.set("belt.default", { count: 4 });
+        buildings.set("balancer.default", { count: 2 });
+        buildings.set("belt.default", { count: 3 });
         buildings.set("mixer.default", { count: 2 });
+        buildings.set("balancer.splitter", { count: 1 });
         buildings.set("stacker.default", { count: 1 });
 
         return buildings;
