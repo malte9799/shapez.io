@@ -152,7 +152,7 @@ export class HUDUnlockNotification extends BaseHUDPart {
 
     requestNextLevel() {
         this.requestClose();
-        this.root.hud.parts.levelSelector.load(this.root.hubGoals.level - 1);
+        this.root.hud.parts.levelSelector.onLevelRequested(this.root.hubGoals.level - 1);
     }
 
     requestLevelSelector() {
