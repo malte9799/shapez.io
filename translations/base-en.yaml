@@ -384,6 +384,7 @@ ingame:
     # Bottom left tutorial hints
     tutorialHints:
         title: Need help?
+        noMoreHint: No More Hints
         showHint:
             0: Show hint
             1: Show extra hint
