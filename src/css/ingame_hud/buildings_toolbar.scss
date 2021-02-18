@@ -110,10 +110,6 @@
                 }
             }
 
-            &:not(.hint_needed_buildings) p {
-                display: none;
-            }
-
             &.hint_needed_buildings {
                 &::before {
                     content: "";
@@ -127,10 +123,6 @@
                     z-index: 4;
                     background-color: #ff6666;
                     border: #111 solid 0px;
-                }
-
-                &.negative::before {
-                    background-color: #ff3333;
                 }
 
                 p {
